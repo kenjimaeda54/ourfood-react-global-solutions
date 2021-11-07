@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   grid-area: AS;
@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const Title = styled.h3``;
 
-export const ContainerNavigation = styled.d``;
+export const ContainerNavigation = styled.div``;
 
 export const Button = styled.button``;
 

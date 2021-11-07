@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   Title,
   ContainerNavigation,
   Button,
   TitleButton,
-} from "./styles";
+} from './styles';
 
 export function Aside() {
   return (
