@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   grid-area: SC;
   overflow-y: scroll;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 90px);
   ::-webkit-scrollbar {
     width: 10px;
   }

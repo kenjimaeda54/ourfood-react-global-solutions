@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card } from '../../components/card';
+import { CardDonation } from '../../components/card_donation';
 import { listDonation } from '../../util';
 import { Container, Title, Subtitle, ContainerCard } from './styles';
 
@@ -14,15 +14,19 @@ export function Home() {
     <Container>
       <Title>Quem acredita na causa</Title>
       <Subtitle>Doe e continue doando para ser nosso campeão</Subtitle>
-      <ContainerSection>
-        <Button>
-          <Left />
-        </Button>
-        {orderedList.map}
-        <Button>
-          <Right />
-        </Button>
-      </ContainerSection>
+      <ContainerCard>
+        {orderedList.map((itens, index) => (
+          <CardDonation
+            key={itens.id}
+            name={itens.name}
+            photo={itens.photo}
+            number={index}
+            donation={itens.donation}
+            location={itens.location}
+          />
+        ))}
+        ;
+      </ContainerCard>
     </Container>
   );
 }

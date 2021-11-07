@@ -9,5 +9,4 @@ export const Container = styled.div`
     'AS  HD'
     'AS  SC';
   height: 100vh;
-  min-height: 340px;
 `;

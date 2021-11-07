@@ -2,9 +2,9 @@ import React from 'react';
 import { Container, Title, WrapTitle, Punctuation } from './styles';
 
 // eslint-disable-next-line react/prop-types
-export function CardProduct({ name, photo, punctuation, children }) {
+export function CardProduct({ name, photo, punctuation, children, logged }) {
   return (
-    <Container isLogged={false}>
+    <Container isLogged={logged}>
       <img
         width={450}
         height={300}
