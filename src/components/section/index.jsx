@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from './styles';
 
-export function Section() {
-  return <Container>eu sou section</Container>;
+// eslint-disable-next-line react/prop-types
+export function Section({ children }) {
+  return <Container>{children}</Container>;
 }

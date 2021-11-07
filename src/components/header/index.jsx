@@ -1,6 +1,20 @@
 import React from 'react';
-import { Container } from './styles';
+import {
+  Container,
+  TitleName,
+  ContainerPunctuation,
+  SubTitle,
+  Punctuation,
+} from './styles';
 
 export function Header() {
-  return <Container>eu sou o header</Container>;
+  return (
+    <Container>
+      <TitleName>Beatriz</TitleName>
+      <ContainerPunctuation>
+        <SubTitle>Pontos:</SubTitle>
+        <Punctuation>0</Punctuation>
+      </ContainerPunctuation>
+    </Container>
+  );
 }
