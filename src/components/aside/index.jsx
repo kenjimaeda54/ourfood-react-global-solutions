@@ -46,7 +46,10 @@ export function Aside() {
           onMouseOver={() => handleShowMessage(2)}
         >
           <Button>
-            <TitleButton showMessage={id === 2 && mouse}> Produtos</TitleButton>
+            <TitleButton showMessage={id === 2 && mouse}>
+              {' '}
+              Recompensas
+            </TitleButton>
             <Product />
           </Button>
         </div>

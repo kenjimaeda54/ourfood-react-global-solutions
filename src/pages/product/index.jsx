@@ -67,6 +67,7 @@ export function Product() {
           >
             <Thing>
               <Button
+                canPlay={logged}
                 disabled={logged ? false : true}
                 onClick={() => handleToggle('plus')}
                 type={'plus'}
@@ -74,7 +75,11 @@ export function Product() {
                 <Plus />
               </Button>
               <Value>{value}</Value>
-              <Button onClick={() => handleToggle('minus')} type={'minus'}>
+              <Button
+                canPlay={logged}
+                onClick={() => handleToggle('minus')}
+                type={'minus'}
+              >
                 <Minus />
               </Button>
             </Thing>

@@ -85,6 +85,8 @@ export const Button = styled.button`
   border-radius: 4px;
   transition: transform 0.15s;
   transform: translateZ(0);
+  cursor: ${({ canPlay }) => (canPlay ? 'grabbing' : 'no-drop')};
+  opacity: ${({ canPlay }) => (canPlay ? 1 : 0.1)};
   transition: 0.6s;
   overflow: hidden;
   &:focus {
@@ -120,7 +122,6 @@ export const Button = styled.button`
     background: ${({ type, theme }) =>
       type === 'plus' ? theme.colors.green : theme.colors.red};
   }
-  cursor: pointer;
   &:before {
     transform: translateX(300px) skewX(-15deg);
     opacity: 0.6;
