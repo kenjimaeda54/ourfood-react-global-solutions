@@ -1,6 +1,6 @@
-import React from "react";
-import { Container } from "./styles";
+import React from 'react'
+import { Container } from './styles'
 
-export function Loading(): JSX.ELement {
-  return <Container />;
+export function Loading() {
+  return <Container />
 }
