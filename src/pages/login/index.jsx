@@ -31,9 +31,9 @@ export function Login() {
         </ContainerText>
         <WrapLogin>
           <Label>Email</Label>
-          <Input />
+          <Input autoFocus />
           <Label>Senha</Label>
-          <Input />
+          <Input autoFocus />
         </WrapLogin>
       </ContainerLogin>
     </Container>

@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 20px 45px;
 `;
 
 export const Title = styled.h1`
@@ -13,6 +12,7 @@ export const Title = styled.h1`
   font-size: 30px;
   line-height: 35px;
   margin-bottom: 20px;
+  padding: 20px 45px;
 `;
 
 export const Subtitle = styled.small`
@@ -20,6 +20,7 @@ export const Subtitle = styled.small`
   color: ${({ theme }) => theme.colors.white};
   font-size: 20px;
   line-height: 25px;
+  padding: 20px 45px;
 `;
 
 export const ContainerLogin = styled.div`
@@ -28,6 +29,7 @@ export const ContainerLogin = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 20px 45px;
 `;
 
 export const WrapLogin = styled.div`
