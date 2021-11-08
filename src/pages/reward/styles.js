@@ -23,7 +23,7 @@ export const Subtitle = styled.small`
   color: ${({ theme }) => theme.colors.white};
   font-size: 20px;
   line-height: 25px;
-  padding: 0px 45px;
+  padding: 20px 45px;
 `;
 
 export const ContainerScroll = styled.div`

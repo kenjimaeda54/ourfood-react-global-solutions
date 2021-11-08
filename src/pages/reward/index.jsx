@@ -50,7 +50,7 @@ export function Reward() {
         </ButtonScroll>
         <Subtitle>
           Passe o mouse sobre as setas para realizar rolagem da lista,conforme
-          mantem mouse em movimento nas setas, lista continua rolando.
+          mantem mouse em movimento nas setas, lista continua movimento.
         </Subtitle>
         <ButtonScroll>
           <Right onMouseOver={() => handleScroll('right')} />

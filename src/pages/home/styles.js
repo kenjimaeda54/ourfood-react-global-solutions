@@ -1,10 +1,10 @@
 import styled from 'styled-components';
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 20px 45px;
 `;
 
 export const Title = styled.h1`
@@ -13,6 +13,7 @@ export const Title = styled.h1`
   font-size: 30px;
   line-height: 35px;
   margin-bottom: 20px;
+  padding: 20px 45px;
 `;
 
 export const Subtitle = styled.small`
@@ -20,13 +21,46 @@ export const Subtitle = styled.small`
   color: ${({ theme }) => theme.colors.white};
   font-size: 20px;
   line-height: 25px;
+  padding: 20px 45px;
+`;
+
+export const ContainerScroll = styled.div`
+  margin-top: 40px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0px 45px;
+`;
+
+export const Right = styled(AiOutlineArrowRight)`
+  width: 20px;
+  height: 20px;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+export const Left = styled(AiOutlineArrowLeft)`
+  width: 20px;
+  height: 20px;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+export const ButtonScroll = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: grabbing;
+  &: {
+    opacity: 0.5;
+  }
 `;
 
 export const ContainerCard = styled.div`
-  display: flex;
-  gap: 20px;
+  padding-left: 45px;
+  padding-right: 10px;
   margin-top: 20px;
-  flex-wrap: wrap;
+  display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 20px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 `;

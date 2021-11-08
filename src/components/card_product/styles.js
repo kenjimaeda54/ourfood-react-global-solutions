@@ -11,7 +11,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0 19px 38px ${({ theme }) => theme.colors.primary},
     0 15px 12px ${({ theme }) => theme.colors.primary};
-  height: 450px;
+  min-height: 450px;
   border-radius: 10px;
 `;
 

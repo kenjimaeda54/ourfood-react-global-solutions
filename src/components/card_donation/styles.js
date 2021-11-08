@@ -5,12 +5,12 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  width: 450px;
+  min-width: 450px;
   gap: 10px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0 19px 38px ${({ theme }) => theme.colors.primary},
     0 15px 12px ${({ theme }) => theme.colors.primary};
-  height: 400px;
+  min-height: 400px;
   border-radius: 10px;
 `;
 
