@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Title,
@@ -36,40 +37,65 @@ export function Aside() {
           onMouseOut={handleHiddenMessage}
           onMouseOver={() => handleShowMessage(1)}
         >
-          <Button>
-            <TitleButton showMessage={id === 1 && mouse}> Home</TitleButton>
-            <Home />
-          </Button>
+          <Link
+            to="/"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            <Button>
+              <TitleButton showMessage={id === 1 && mouse}> Home</TitleButton>
+              <Home />
+            </Button>
+          </Link>
         </div>
         <div
           onMouseOut={handleHiddenMessage}
           onMouseOver={() => handleShowMessage(2)}
         >
-          <Button>
-            <TitleButton showMessage={id === 2 && mouse}>
-              {' '}
-              Recompensas
-            </TitleButton>
-            <Product />
-          </Button>
+          <Link
+            to="/recompensa"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            <Button>
+              <TitleButton showMessage={id === 2 && mouse}>Premios</TitleButton>
+              <Product />
+            </Button>
+          </Link>
         </div>
         <div
           onMouseOut={handleHiddenMessage}
           onMouseOver={() => handleShowMessage(3)}
         >
-          <Button>
-            <TitleButton showMessage={id === 3 && mouse}> Doar</TitleButton>
-            <Donate />
-          </Button>
+          <Link
+            to="/login"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            <Button>
+              <TitleButton showMessage={id === 3 && mouse}> Doar</TitleButton>
+              <Donate />
+            </Button>
+          </Link>
         </div>
         <div
           onMouseOut={handleHiddenMessage}
           onMouseOver={() => handleShowMessage(4)}
         >
-          <Button>
-            <TitleButton showMessage={id === 4 && mouse}> Sobre</TitleButton>
-            <About />
-          </Button>
+          <Link
+            to="/sobre"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            <Button>
+              <TitleButton showMessage={id === 4 && mouse}> Sobre</TitleButton>
+              <About />
+            </Button>
+          </Link>
         </div>
       </ContainerNavigation>
     </Container>
