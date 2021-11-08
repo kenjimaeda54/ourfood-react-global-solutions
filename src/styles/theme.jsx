@@ -9,6 +9,10 @@ export default {
     lightGreen: '#8bc34a',
     green: '#008000',
     white: '#fff',
+    grayLight: '#474a59',
+    whiteVariant: '#f1f1f2',
+    whiteThird: ' #f2f2f2',
+    gray: '##c2c2c5',
   },
   fonts: {
     light: 300,
