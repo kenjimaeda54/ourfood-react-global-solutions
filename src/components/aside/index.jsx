@@ -11,6 +11,7 @@ import {
   Product,
   Donate,
   About,
+  LogIn,
 } from './styles';
 
 export function Aside() {
@@ -70,14 +71,16 @@ export function Aside() {
           onMouseOver={() => handleShowMessage(3)}
         >
           <Link
-            to="/login"
+            to="/cadastro"
             style={{
               textDecoration: 'none',
             }}
           >
             <Button>
-              <TitleButton showMessage={id === 3 && mouse}> Doar</TitleButton>
-              <Donate />
+              <TitleButton showMessage={id === 3 && mouse}>
+                Cadastro
+              </TitleButton>
+              <LogIn />
             </Button>
           </Link>
         </div>
@@ -86,13 +89,29 @@ export function Aside() {
           onMouseOver={() => handleShowMessage(4)}
         >
           <Link
+            to="/doacao"
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            <Button>
+              <TitleButton showMessage={id === 4 && mouse}> Doar</TitleButton>
+              <Donate />
+            </Button>
+          </Link>
+        </div>
+        <div
+          onMouseOut={handleHiddenMessage}
+          onMouseOver={() => handleShowMessage(5)}
+        >
+          <Link
             to="/sobre"
             style={{
               textDecoration: 'none',
             }}
           >
             <Button>
-              <TitleButton showMessage={id === 4 && mouse}> Sobre</TitleButton>
+              <TitleButton showMessage={id === 5 && mouse}> Sobre</TitleButton>
               <About />
             </Button>
           </Link>

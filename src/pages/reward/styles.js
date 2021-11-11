@@ -26,6 +26,26 @@ export const Subtitle = styled.small`
   padding: 20px 45px;
 `;
 
+export const ButtonAdd = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const TextAdd = styled.small`
+  font-weight: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.red};
+  font-size: 20px;
+  line-height: 25px;
+  margin-bottom: 20px;
+`;
+
 export const ContainerScroll = styled.div`
   margin-top: 40px;
   display: flex;

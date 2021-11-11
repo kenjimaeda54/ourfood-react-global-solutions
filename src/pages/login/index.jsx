@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Title,
@@ -11,9 +12,18 @@ import {
   ContainerText,
   Description,
   Button,
+  ContainerButtonSubmit,
+  ButtonSubmit,
+  TextButton,
 } from './styles';
 
 export function Login() {
+  const emailRef = useRef(null);
+
+  useEffect(() => {
+    emailRef.current?.focus();
+  }, []);
+
   return (
     <Container>
       <Title>Login</Title>
@@ -27,13 +37,20 @@ export function Login() {
           <Description>
             Seja bem vindo, vamos acabar com a fome do mundo juntos
           </Description>
-          <Button>Cadastrar?</Button>
+          <Link to="/cadastro" style={{ textDecoration: 'none' }}>
+            <Button>Cadastrar?</Button>
+          </Link>
         </ContainerText>
         <WrapLogin>
           <Label>Email</Label>
-          <Input autoFocus />
+          <Input placeholder="joaoxxx@gmail.com" autoFocus ref={emailRef} />
           <Label>Senha</Label>
-          <Input autoFocus />
+          <Input placeholder="1234adf" autoFocus />
+          <ButtonSubmit>
+            <ContainerButtonSubmit>
+              <TextButton>Entrar</TextButton>
+            </ContainerButtonSubmit>
+          </ButtonSubmit>
         </WrapLogin>
       </ContainerLogin>
     </Container>

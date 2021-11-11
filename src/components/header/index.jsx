@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { keyStorage } from '../../util';
 import {
   Container,
   TitleName,
@@ -8,9 +9,17 @@ import {
 } from './styles';
 
 export function Header() {
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const getName = localStorage.getItem(keyStorage);
+    const setUserName = getName ? JSON.parse(getName) : '';
+    setName(setUserName);
+  }, []);
+
   return (
     <Container>
-      <TitleName>Beatriz</TitleName>
+      <TitleName>{name}</TitleName>
       <ContainerPunctuation>
         <SubTitle>Pontos:</SubTitle>
         <Punctuation>0</Punctuation>

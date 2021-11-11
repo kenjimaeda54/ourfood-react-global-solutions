@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  opacity: ${({ isLogged }) => (isLogged ? 1 : 0.3)};
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;

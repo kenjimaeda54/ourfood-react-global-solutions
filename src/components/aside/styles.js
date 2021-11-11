@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AiOutlineHome } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineSolution } from 'react-icons/ai';
 import { BiDonateHeart, BiBook } from 'react-icons/bi';
 import { MdProductionQuantityLimits } from 'react-icons/md';
 
@@ -91,6 +91,12 @@ export const Donate = styled(BiDonateHeart)`
 `;
 
 export const About = styled(BiBook)`
+  width: 25px;
+  height: 25px;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+export const LogIn = styled(AiOutlineSolution)`
   width: 25px;
   height: 25px;
   color: ${({ theme }) => theme.colors.white};

@@ -4,6 +4,8 @@ import {
   Container,
   Title,
   Subtitle,
+  ButtonAdd,
+  TextAdd,
   ContainerScroll,
   Right,
   Left,
@@ -65,24 +67,30 @@ export function Reward() {
             punctuation={product.punctuation}
             logged={logged}
           >
-            <Thing>
-              <Button
-                canPlay={logged}
-                disabled={logged ? false : true}
-                onClick={() => handleToggle('plus')}
-                type={'plus'}
-              >
-                <Plus />
-              </Button>
-              <Value>{value}</Value>
-              <Button
-                canPlay={logged}
-                onClick={() => handleToggle('minus')}
-                type={'minus'}
-              >
-                <Minus />
-              </Button>
-            </Thing>
+            {logged ? (
+              <Thing>
+                <Button
+                  canPlay={logged}
+                  disabled={logged ? false : true}
+                  onClick={() => handleToggle('plus')}
+                  type={'plus'}
+                >
+                  <Plus />
+                </Button>
+                <Value>{value}</Value>
+                <Button
+                  canPlay={logged}
+                  onClick={() => handleToggle('minus')}
+                  type={'minus'}
+                >
+                  <Minus />
+                </Button>
+              </Thing>
+            ) : (
+              <ButtonAdd>
+                <TextAdd>Trocar os pontos?</TextAdd>
+              </ButtonAdd>
+            )}
           </CardProduct>
         ))}
       </ContainerCardProduct>

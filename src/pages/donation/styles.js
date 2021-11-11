@@ -50,7 +50,7 @@ export const Label = styled.label`
   color: ${({ theme }) => theme.colors.gray};
   font-size: 20px;
   line-height: 25px;
-  font-weight: ${({ theme }) => theme.fonts.medium};
+  font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
 export const Input = styled.input`
@@ -75,7 +75,8 @@ export const Input = styled.input`
 export const ContainerText = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 55%;
+  justify-content: space-evenly;
   align-items: flex-start;
   background: white;
   width: 35%;
@@ -88,29 +89,17 @@ export const TitleText = styled.h3`
   color: ${({ theme }) => theme.colors.secondary};
   font-size: 30px;
   line-height: 35px;
-  font-weight: ${({ theme }) => theme.fonts.bold};
+  font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
 export const Description = styled.p`
   color: ${({ theme }) => theme.colors.grayLight};
+  width: 90%;
   font-size: 25px;
   line-height: 30px;
-  font-weight: ${({ theme }) => theme.fonts.medium};
+  font-family: ${({ theme }) => theme.fonts.medium};
+  text-align: left;
 `;
-
-export const Button = styled.button`
-  border: none;
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.grayLight};
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: ${({ theme }) => theme.fonts.regular};
-  cursor: pointer;
-  &:hover {
-    color: ${({ theme }) => theme.colors.green};
-  }
-`;
-
 export const ButtonSubmit = styled.span`
   width: 100%;
   border: none;
@@ -126,7 +115,7 @@ export const ContainerButtonSubmit = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 10px;
   margin-bottom: 20px;
 `;
 
