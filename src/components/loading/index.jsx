@@ -1,6 +1,12 @@
 import React from 'react';
-import { Container } from './styles';
+import { Container, Load, Bar } from './styles';
 
 export function Loading() {
-  return <Container />;
+  return (
+    <Container>
+      <Load>
+        <Bar />
+      </Load>
+    </Container>
+  );
 }

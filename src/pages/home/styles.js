@@ -7,6 +7,15 @@ export const Container = styled.div`
   width: 100%;
 `;
 
+export const ContainerLoading = styled.div`
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100vh;
+`;
+
 export const Title = styled.h1`
   font-weight: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};

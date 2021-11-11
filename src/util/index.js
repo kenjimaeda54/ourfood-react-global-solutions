@@ -1,5 +1,5 @@
 export const keyStorage = '@KeyUserStorage';
-export const baseUrl = 'http://localhost:8080/uorFood/';
+export const baseUrl = 'http://localhost:8080/uorFood';
 
 export const listProducts = [
   {
