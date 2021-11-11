@@ -1,11 +1,5 @@
 export const keyStorage = '@KeyUserStorage';
-
-export const storageUser = {
-  name: '',
-  email: '',
-  punctuation: '',
-  link: '',
-};
+export const baseUrl = 'http://localhost:8080/uorFood/';
 
 export const listProducts = [
   {

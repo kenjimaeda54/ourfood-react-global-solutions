@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { listProducts } from '../../util';
+import { listProducts, keyStorage } from '../../util';
+import { CardProduct } from '../../components/card_product';
+import { Redirect } from 'react-router-dom';
 import {
   Container,
   Title,
@@ -17,13 +19,22 @@ import {
   Minus,
   Plus,
 } from './styles';
-import { CardProduct } from '../../components/card_product';
 
 export function Reward() {
   const scrollRef = useRef(null);
   const [value, setValue] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [logged, setLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
+  function handleHaveUser() {
+    const getUser = localStorage.getItem(keyStorage);
+    const setUserStorage = getUser ? JSON.parse(getUser) : '';
+    if (setUserStorage === '') {
+      setRedirect(true);
+    } else {
+      setIsLogged(true);
+    }
+  }
 
   function handleToggle(type) {
     if (value === 0 && type === 'minus') return;
@@ -65,35 +76,27 @@ export function Reward() {
             name={product.name}
             photo={product.photo}
             punctuation={product.punctuation}
-            logged={logged}
+            logged={isLogged}
           >
-            {logged ? (
+            {isLogged ? (
               <Thing>
-                <Button
-                  canPlay={logged}
-                  disabled={logged ? false : true}
-                  onClick={() => handleToggle('plus')}
-                  type={'plus'}
-                >
+                <Button onClick={() => handleToggle('plus')} type={'plus'}>
                   <Plus />
                 </Button>
                 <Value>{value}</Value>
-                <Button
-                  canPlay={logged}
-                  onClick={() => handleToggle('minus')}
-                  type={'minus'}
-                >
+                <Button onClick={() => handleToggle('minus')} type={'minus'}>
                   <Minus />
                 </Button>
               </Thing>
             ) : (
-              <ButtonAdd>
+              <ButtonAdd onClick={handleHaveUser}>
                 <TextAdd>Trocar os pontos?</TextAdd>
               </ButtonAdd>
             )}
           </CardProduct>
         ))}
       </ContainerCardProduct>
+      {redirect && <Redirect to="/login" />}
     </Container>
   );
 }

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   grid-area: HD;
@@ -9,6 +10,12 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0px 50px;
+`;
+
+export const Photo = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
 `;
 
 export const TitleName = styled.h3`
@@ -34,4 +41,18 @@ export const SubTitle = styled.span`
 export const Punctuation = styled(SubTitle)`
   color: ${({ theme }) => theme.colors.white};
   font-weight: ${({ theme }) => theme.fonts.bold};
+`;
+
+export const Anchor = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: ${({ theme }) => theme.fonts.bold};
+  font-size: 20px;
+  line-height: 23px;
+  text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.colors.red};
+  text-decoration-width: 3px;
+  &:hover {
+    opacity: 0.7;
+  }
 `;

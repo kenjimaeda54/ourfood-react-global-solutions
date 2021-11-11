@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { keyStorage } from '../../util';
 import {
   Container,
   Title,
@@ -17,6 +18,7 @@ import {
 export function Aside() {
   const [mouse, setMouse] = useState(false);
   const [id, setId] = useState(0);
+  const [haveUser, setHaveUser] = useState(false);
 
   function handleHiddenMessage() {
     setId(0);
@@ -28,10 +30,20 @@ export function Aside() {
     setMouse(true);
   }
 
+  useEffect(() => {
+    const getUser = localStorage.getItem(keyStorage);
+    const setUserStorage = getUser ? JSON.parse(getUser) : ' ';
+    if (setUserStorage === '') {
+      setHaveUser(false);
+    } else {
+      setHaveUser(true);
+    }
+  }, []);
+
   return (
     <Container>
       <Title>
-        <Subtitle> UOR FOOD</Subtitle>
+        <Subtitle> OUR FOOD</Subtitle>
       </Title>
       <ContainerNavigation>
         <div
@@ -88,17 +100,31 @@ export function Aside() {
           onMouseOut={handleHiddenMessage}
           onMouseOver={() => handleShowMessage(4)}
         >
-          <Link
-            to="/doacao"
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            <Button>
-              <TitleButton showMessage={id === 4 && mouse}> Doar</TitleButton>
-              <Donate />
-            </Button>
-          </Link>
+          {haveUser ? (
+            <Link
+              to="/login"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <Button>
+                <TitleButton showMessage={id === 4 && mouse}> Doar</TitleButton>
+                <Donate />
+              </Button>
+            </Link>
+          ) : (
+            <Link
+              to="/doacao"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <Button>
+                <TitleButton showMessage={id === 4 && mouse}> Doar</TitleButton>
+                <Donate />
+              </Button>
+            </Link>
+          )}
         </div>
         <div
           onMouseOut={handleHiddenMessage}

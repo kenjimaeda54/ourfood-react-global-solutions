@@ -13,10 +13,10 @@ export function About() {
     <Container>
       <Section>
         <TitleSection>
-          <Effect> Uor Food </Effect>
+          <Effect> Our Food </Effect>
         </TitleSection>
         <Description>
-          UOR Food, surgiu apos a iniciativa grupo de alunos da faculdade
+          OUR Food, surgiu apos a iniciativa grupo de alunos da faculdade
           diminui o desperdício de alimentos é acabar com a fome do mundo.
         </Description>
       </Section>

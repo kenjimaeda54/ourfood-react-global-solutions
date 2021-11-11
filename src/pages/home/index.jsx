@@ -1,6 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useRef } from 'react';
 import { CardDonation } from '../../components/card_donation';
-import { listDonation } from '../../util';
+import { baseUrl } from '../../util';
 import {
   Container,
   Title,
@@ -13,11 +14,22 @@ import {
 } from './styles';
 
 export function Home() {
+  // eslint-disable-next-line no-unused-vars
   const [orderedList, setOrderedList] = useState([]);
   const scrollRef = useRef(null);
 
+  async function getUser() {
+    try {
+      const response = await fetch(`${baseUrl}/users`);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
-    setOrderedList(listDonation.sort((a, b) => b.donation - a.donation));
+    getUser();
   }, []);
 
   function handleScroll(type) {
