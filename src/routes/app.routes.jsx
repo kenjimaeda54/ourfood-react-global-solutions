@@ -6,6 +6,7 @@ import { Reward } from '../pages/reward';
 import { About } from '../pages/about';
 import { Login } from '../pages/login';
 import { Donation } from '../pages/donation';
+import { FieldDonation } from '../pages/field_donation';
 
 export function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export function AppRoutes() {
       <Route path="/login" component={Login} />
       <Route path="/cadastro" component={RegisterProfile} />
       <Route path="/doacao" component={Donation} />
+      <Route path="/campoDoacao" component={FieldDonation} />
     </Switch>
   );
 }

@@ -1,57 +1,32 @@
-import React, { useRef, useEffect } from 'react';
-import {
-  Container,
-  Title,
-  Subtitle,
-  ContainerLogin,
-  WrapLogin,
-  Label,
-  Input,
-  TitleText,
-  ContainerText,
-  Description,
-  ButtonSubmit,
-  ContainerButtonSubmit,
-  TextButton,
-} from './styles';
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useState, useRef, Fragment } from 'react';
+import { CardMission } from '../../components/card_mission';
+import { Container, Title, Subtitle, ContainerCardMission } from './styles';
 
 export function Donation() {
-  const nameRef = useRef(null);
-
-  useEffect(() => {
-    nameRef.current?.focus();
-  }, []);
-
   return (
     <Container>
-      <Title>Faça sua doação</Title>
-      <Subtitle>Vamos juntos acabar com a fome do mundo</Subtitle>
-      <ContainerLogin>
-        <ContainerText>
-          <TitleText>Doação</TitleText>
-          <div>
-            <Description>
-              Ao doar você não vai poder editar ou deletar os produtos, doado.
-            </Description>
-            <Description>Doando você ira ajudar famílias.</Description>
-          </div>
-        </ContainerText>
-        <WrapLogin>
-          <Label>Nome do produto</Label>
-          <Input type="text" placeholder="Arroz" autoFocus ref={nameRef} />
-          <Label>Validate</Label>
-          <Input placeholder="12/10" />
-          <Label>Quantity</Label>
-          <Input placeholder=" 10" />
-          <Label>Photo</Label>
-          <Input placeholder="https://www.google.com/img.png" autoFocus />
-          <ButtonSubmit>
-            <ContainerButtonSubmit>
-              <TextButton>Entrar</TextButton>
-            </ContainerButtonSubmit>
-          </ButtonSubmit>
-        </WrapLogin>
-      </ContainerLogin>
+      <div style={{ padding: 45 }}>
+        <Title>Doacao</Title>
+        <Subtitle>
+          Ajude uma causa específica ou as criancas no mundo todo.
+        </Subtitle>
+      </div>
+      <ContainerCardMission>
+        <Subtitle>Nosso principal objetivo</Subtitle>
+        <CardMission
+          titleHelp="Ajude refugiados na Síria"
+          total={500}
+          valueDonation={500}
+          photo="https://cdn.revistaforum.com.br/wp-content/uploads/2015/06/fome.jpg"
+        />
+        <CardMission
+          titleHelp="Ajude acabar com a fome no Paquistão"
+          total={500}
+          valueDonation={500}
+          photo="https://cdn.revistaforum.com.br/wp-content/uploads/2015/06/fome.jpghttps://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Libraries/Production+Library/2020/21-04-2020_WFP_Syria_2.jpg/image1170x530cropped.jpghttps://cdn.revistaforum.com.br/wp-content/uploads/2015/06/fome.jpg"
+        />
+      </ContainerCardMission>
     </Container>
   );
 }
