@@ -37,9 +37,21 @@ export function About() {
           <Effect> Quem pode doar? </Effect>
         </TitleSection>
         <Description>
-          Todos são livres para doar resgatar suas recompensas, caso você possua
-          empresa deseja cadastrar é bem-vindo. Existe opção no momento de
-          cadastro de perfil para esta situação.
+          Todos são livres para doar resgatar suas recompensas, se deseja
+          cadastrar uma empresa,para divulgar ela no site . Existe opção no
+          momento de cadastro para esta situação.
+        </Description>
+      </Section>
+      <Section>
+        <TitleSection>
+          <Effect> Como os produtos chegam as pessoas? </Effect>
+        </TitleSection>
+        <Description>
+          Trabalhamos em conjunto com a organização PAM, na página de doação,
+          poderá visualizar as principais causas do momento, elas são
+          selecionadas conforme o Programa Mundial de Alimentos. Se optar por
+          alguma dessas causas os produtos vão chegar ate essas famílias por
+          intermédio do Programa.
         </Description>
       </Section>
       <Section>
@@ -57,25 +69,34 @@ export function About() {
         <TitleSection>
           <Effect> Software? </Effect>
         </TitleSection>
-        <Description>
-          <ColorDescription>Pagina inicial:</ColorDescription> Nesta página esta
-          nossos doadores, por ordem crescente de doações.
-        </Description>
-        <Description>
-          <ColorDescription>Pagina premio:</ColorDescription> Nesta seção existe
-          dois momentos, primeiro momento é anonimo, vai conseguir visualizar as
-          recompensas disponíveis, mas não vão poder selecionar. No momento
-          logado poderá trocar seus pontos pelos produtos visualizados
-        </Description>
-        <Description>
-          <ColorDescription>Pagina perfil:</ColorDescription>Poderá visualizar
-          seu perfil e editar as informações contidas também excluir seu perfil
-          se desejar.
-        </Description>
-        <Description>
+        <div>
+          <ColorDescription>Pagina inicial:</ColorDescription>
+          <Description>
+            Nesta página esta nossos doadores, por ordem crescente de doações.
+          </Description>
+        </div>
+        <div>
+          <ColorDescription>Pagina premio:</ColorDescription>
+          <Description>
+            Nesta seção existe dois momentos, primeiro momento é anonimo, vai
+            conseguir visualizar as recompensas disponíveis, mas não vão poder
+            selecionar. No momento logado poderá trocar seus pontos pelos
+            produtos visualizados
+          </Description>
+        </div>
+        <div>
+          <ColorDescription>Pagina perfil:</ColorDescription>
+          <Description>
+            Poderá visualizar seu perfil e editar as informações contidas também
+            excluir seu perfil se desejar.
+          </Description>
+        </div>
+        <div>
           <ColorDescription>Pagina login e cadastro:</ColorDescription>
-          São destinadas a cadastrar e logar usando seu perfil.
-        </Description>
+          <Description>
+            São destinadas a cadastrar e logar usando seu perfil.
+          </Description>
+        </div>
       </Section>
     </Container>
   );

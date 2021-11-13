@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { BsPower } from 'react-icons/bs';
 
 export const Container = styled.div`
   grid-area: HD;
@@ -10,6 +11,12 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0px 50px;
+`;
+
+export const ContainerUser = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const Photo = styled.img`
@@ -55,4 +62,10 @@ export const Anchor = styled(Link)`
   &:hover {
     opacity: 0.7;
   }
+`;
+
+export const Logout = styled(BsPower)`
+  width: 20px;
+  height: 20px;
+  color: ${({ theme }) => theme.colors.white};
 `;

@@ -2,6 +2,8 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { keyStorage } from '../../util';
 import {
   Container,
+  ContainerUser,
+  Logout,
   TitleName,
   Photo,
   ContainerPunctuation,
@@ -15,7 +17,7 @@ export function Header() {
   const [haveUser, setHaveUser] = useState(false);
 
   useEffect(() => {
-    const getName = localStorage.getItem(keyStorage);
+    const getName = sessionStorage.getItem(keyStorage);
     const setUserName = getName ? JSON.parse(getName) : '';
     if (setUserName === '') {
       setHaveUser(false);
@@ -34,8 +36,11 @@ export function Header() {
     <Container>
       {haveUser ? (
         <Fragment>
-          <Photo src={user.link} width={20} height={20} />
-          <TitleName>{name}</TitleName>
+          <ContainerUser>
+            <Logout />
+            <Photo src={user.link} width={20} height={20} />
+            <TitleName>{name}</TitleName>
+          </ContainerUser>
           <ContainerPunctuation>
             <SubTitle>Pontos:</SubTitle>
             <Punctuation>0</Punctuation>

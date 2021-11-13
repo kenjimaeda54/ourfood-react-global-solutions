@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   Container,
   Photo,
@@ -14,29 +14,32 @@ import {
   TitleHelp,
 } from './styles';
 
-// eslint-disable-next-line react/prop-types
-export function CardMission({ titleHelp, photo, valueDonation, total }) {
+export function CardMission({
+  titleHelp,
+  photo,
+  valueDonation,
+  total,
+  onClick,
+}) {
   return (
     <Container>
       <Photo src={photo} />
       <Content>
         <TitleHelp>{titleHelp}</TitleHelp>
         <Footer>
-          <TitleDonation>
-            Quantidade de doações:
+          <div>
+            <TitleDonation>Quantidade de doações:</TitleDonation>
             <ColorDonation>
               {valueDonation} de {total}
-            </ColorDonation>{' '}
-          </TitleDonation>
+            </ColorDonation>
+          </div>
           <ContainerBarDonation total={total}>
             <BarDonation quantity={valueDonation} />
           </ContainerBarDonation>
         </Footer>
-        <Link to="/doacao">
-          <Button>
-            <TextButton>Doar</TextButton>
-          </Button>
-        </Link>
+        <Button onClick={onClick}>
+          <TextButton>Doar</TextButton>
+        </Button>
       </Content>
     </Container>
   );

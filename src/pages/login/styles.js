@@ -6,6 +6,15 @@ export const Container = styled.div`
   width: 100%;
 `;
 
+export const ContainerLoading = styled.div`
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100vh;
+`;
+
 export const Title = styled.h1`
   font-weight: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
@@ -13,6 +22,15 @@ export const Title = styled.h1`
   line-height: 35px;
   margin-bottom: 20px;
   padding: 20px 45px;
+`;
+
+export const Error = styled.h3`
+  font-weight: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.white};
+  text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.colors.red};
+  font-size: 20px;
+  line-height: 23px;
 `;
 
 export const Subtitle = styled.small`
@@ -96,6 +114,13 @@ export const Description = styled.p`
   font-size: 25px;
   line-height: 30px;
   font-weight: ${({ theme }) => theme.fonts.medium};
+`;
+
+export const DescriptionColor = styled.h3`
+  color: ${({ theme }) => theme.colors.grayLight};
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: ${({ theme }) => theme.fonts.bold};
 `;
 
 export const Button = styled.button`

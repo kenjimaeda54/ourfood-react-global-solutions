@@ -1,9 +1,9 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useRef, Fragment } from 'react';
 import { CardDonation } from '../../components/card_donation';
 import { CardMission } from '../../components/card_mission';
 import { Loading } from '../../components/loading';
-import { baseUrl } from '../../util';
+import { baseUrl, keyStorage } from '../../util';
+import { Redirect } from 'react-router-dom';
 import {
   Container,
   Title,
@@ -25,22 +25,29 @@ import {
 } from './styles';
 
 export function Home() {
-  // eslint-disable-next-line no-unused-vars
   const [orderedList, setOrderedList] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
+  const [mission, setMission] = useState([]);
+  const [redirect, setRedirect] = useState(false);
+  const [description, setDescription] = useState('');
+  const [route, setRoute] = useState('');
   const scrollRef = useRef(null);
 
   useEffect(() => {
     const controller = new AbortController();
     async function getUser() {
       try {
-        const response = await fetch(`${baseUrl}/users`, {
+        const responseUser = await fetch(`${baseUrl}/users`, {
           signal: controller.signal,
         });
-        const data = await response.json();
-        console.log(data);
-        setOrderedList(data.sort((a, b) => b.punctuation - a.punctuation));
+        const responseDonation = await fetch(`${baseUrl}/donations/1`, {
+          signal: controller.signal,
+        });
+
+        const dataUser = await responseUser.json();
+        const dataDonation = await responseDonation.json();
+        setOrderedList(dataUser.sort((a, b) => b.punctuation - a.punctuation));
+        setMission(dataDonation);
       } catch (error) {
         console.log(error);
       } finally {
@@ -60,6 +67,21 @@ export function Home() {
       scrollRef.current.scrollLeft -= 300;
     }
   }
+
+  // eslint-disable-next-line no-unused-vars
+  function handleNavigate(pathname, text) {
+    const user = sessionStorage.getItem(keyStorage);
+    if (!user) {
+      setRedirect(true);
+      setRoute('/login');
+      setDescription('Para realizar doação,por favor faça seu login.');
+      return;
+    }
+    setRedirect(true);
+    setDescription(text);
+    setRoute(pathname);
+  }
+
   return (
     <Container>
       {loading ? (
@@ -74,12 +96,22 @@ export function Home() {
           </div>
           <ContainerCardMission>
             <Subtitle>Nosso principal objetivo</Subtitle>
-            <CardMission
-              title="Ajude refugiados da siria"
-              total={500}
-              valueDonation={500}
-              photo="https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Libraries/Production+Library/2020/21-04-2020_WFP_Syria_2.jpg/image1170x530cropped.jpg"
-            />
+            {mission.map((item) => (
+              <CardMission
+                onClick={() =>
+                  handleNavigate(
+                    '/doacao/formulario',
+                    ' acabar com a fome na Síria',
+                  )
+                }
+                key={item.id}
+                titleHelp={item.title}
+                total={item.totalDonation}
+                valueDonation={item.valueDonation}
+                photo={item.photo}
+              />
+            ))}
+
             <ContainerScroll>
               <ButtonScroll>
                 <Left onMouseOver={() => handleScroll('left')} />
@@ -117,12 +149,13 @@ export function Home() {
                 <Description>
                   Sem paz não podemos acabar com a fome do mundo, enquanto
                   houver fome, nunca teremos um mundo em paz.
-                  <Description>
-                    Programa Mundial de Alimentos(PAM) e o braço da assistência
-                    alimentar das Nações Unidas e a maior organização
-                    humanitária do mundo que trata da fome e promove a seguranca
-                    alimentar.
-                  </Description>
+                </Description>
+                <Description>
+                  Programa Mundial de Alimentos(PAM) e o braço da assistência
+                  alimentar das Nações Unidas e a maior organização humanitária
+                  do mundo que trata da fome e promove a seguranca alimentar.
+                </Description>
+                <Description>
                   A PAM todos os anos fornece assistência alimentar a uma média
                   de 91,4 milhões de pessoas em 83 países. A erradicação da fome
                   é um dos mais maiores{' '}
@@ -130,13 +163,21 @@ export function Home() {
                     17 Objetivos de Desenvolvimento Sustentável{' '}
                   </LinkText>
                   adotadas pelos 193 Estados-Membros das Nações Unidas em 2015.
-                  <Description>
-                    Ficamos honrados com esse prêmio e estamos gratos por
-                    fazerem parte da comunidade OUR FOOD.
-                  </Description>
+                </Description>
+                <Description>
+                  Ficamos honrados com esse prêmio e estamos gratos por fazerem
+                  parte da comunidade OUR FOOD.
                 </Description>
               </ContainerLeftPan>
             </CardPan>
+            {redirect && (
+              <Redirect
+                to={{
+                  pathname: route,
+                  state: { description },
+                }}
+              />
+            )}
           </ContainerCardMission>
         </Fragment>
       )}

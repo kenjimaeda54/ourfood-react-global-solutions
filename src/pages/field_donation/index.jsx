@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Container,
   Title,
@@ -10,6 +11,7 @@ import {
   TitleText,
   ContainerText,
   Description,
+  DescriptionColor,
   ButtonSubmit,
   ContainerButtonSubmit,
   TextButton,
@@ -17,6 +19,8 @@ import {
 
 export function FieldDonation() {
   const nameRef = useRef(null);
+  const location = useLocation();
+  const { description } = location?.state;
 
   useEffect(() => {
     nameRef.current?.focus();
@@ -33,7 +37,8 @@ export function FieldDonation() {
             <Description>
               Ao doar você não vai poder editar ou deletar os produtos, doado.
             </Description>
-            <Description>Doando você ira ajudar famílias.</Description>
+            <Description>Doando você ira ajudar famílias é</Description>
+            <DescriptionColor> {description} </DescriptionColor>
           </div>
         </ContainerText>
         <WrapLogin>

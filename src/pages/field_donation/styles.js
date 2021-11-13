@@ -100,6 +100,14 @@ export const Description = styled.p`
   font-family: ${({ theme }) => theme.fonts.medium};
   text-align: left;
 `;
+
+export const DescriptionColor = styled.h3`
+  color: ${({ theme }) => theme.colors.grayLight};
+  font-size: 25px;
+  line-height: 30px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+`;
+
 export const ButtonSubmit = styled.span`
   width: 100%;
   border: none;

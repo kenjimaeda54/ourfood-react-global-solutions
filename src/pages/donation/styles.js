@@ -22,6 +22,15 @@ export const ContainerCardMission = styled.div`
   padding: 20px 45px;
 `;
 
+export const ContainerLoading = styled.div`
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100vh;
+`;
+
 export const Subtitle = styled.small`
   font-weight: ${({ theme }) => theme.fonts.light};
   color: ${({ theme }) => theme.colors.white};

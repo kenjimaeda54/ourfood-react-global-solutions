@@ -86,6 +86,8 @@ export const CardPan = styled.div`
 export const Photo = styled.img`
   width: 60%;
   height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 `;
 
 export const ContainerLeftPan = styled.div`

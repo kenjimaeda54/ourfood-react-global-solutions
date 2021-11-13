@@ -1,5 +1,6 @@
 export const keyStorage = '@KeyUserStorage';
 export const baseUrl = 'http://localhost:8080/uorFood';
+export const keyStorageEmail = '@KeyUserStorageEmail';
 
 export const listProducts = [
   {
@@ -25,16 +26,16 @@ export const listProducts = [
   },
   {
     id: 4,
-    name: 'Bicileta',
+    name: 'Agua Sanitaria',
     photo:
-      'https://decathlonpro.vteximg.com.br/arquivos/ids/2590793/-caloi-andes-1.jpg?v=637389653926130000',
-    punctuation: 115,
+      'https://io2.convertiez.com.br/m/superpaguemenos/shop/products/images/22887/medium/agua-sanitaria-barbarex-1l_71200.jpg',
+    punctuation: 35,
   },
   {
     id: 5,
     name: 'Feijão',
     photo:
-      'https://www.google.com/imgres?imgurl=https%3A%2F%2Fhortifrutirecife.com.br%2Fimage%2Fcache%2Fcatalog%2Fprodutos%2FFEIJ%25C3%2583O%2520CARIOCA-637x637.png&imgrefurl=https%3A%2F%2Fhortifrutirecife.com.br%2Findex.php%3Froute%3Dproduct%2Fproduct%26product_id%3D172&tbnid=qfdDD1xn03Vk6M&vet=12ahUKEwjP-MvGhYf0AhVCQ7gEHQ9-BNcQMygTegUIARCRAg..i&docid=KXc72cLIHcvMrM&w=637&h=637&q=feij%C3%A3o&client=ubuntu&ved=2ahUKEwjP-MvGhYf0AhVCQ7gEHQ9-BNcQMygTegUIARCRAg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv73el-6hgkIIoSy0PQvG_JO7ESmAVVzgnw&usqp=CAU',
     punctuation: 9,
   },
   {

@@ -12,12 +12,12 @@ export function AppRoutes() {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/recompensa" component={Reward} />
-      <Route path="/sobre" component={About} />
-      <Route path="/login" component={Login} />
-      <Route path="/cadastro" component={RegisterProfile} />
-      <Route path="/doacao" component={Donation} />
-      <Route path="/campoDoacao" component={FieldDonation} />
+      <Route exact path="/recompensa" component={Reward} />
+      <Route exact path="/sobre" component={About} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/cadastro" component={RegisterProfile} />
+      <Route exact path="/doacao" component={Donation} />
+      <Route exact path="/doacao/formulario" component={FieldDonation} />
     </Switch>
   );
 }

@@ -36,6 +36,7 @@ export const Content = styled.div`
 export const Footer = styled.div`
   display: flex;
   height: 100%;
+  width: 100%;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.whiteVariant};
   flex-direction: column;
@@ -44,21 +45,24 @@ export const Footer = styled.div`
   justify-content: space-evenly;
 `;
 
-export const TitleDonation = styled.h3`
+export const TitleDonation = styled.h2`
   color: ${({ theme }) => theme.colors.grayLight};
   font-weight: ${({ theme }) => theme.fonts.light};
   font-size: 19px;
   line-height: 23px;
 `;
 
-export const ColorDonation = styled(TitleDonation)`
+export const ColorDonation = styled.h2`
   color: ${({ theme }) => theme.colors.green};
   margin: 10px 0px;
   font-weight: ${({ theme }) => theme.fonts.bold};
+  font-size: 19px;
+  line-height: 23px;
 `;
 
 export const ContainerBarDonation = styled.div`
   width: ${({ total }) => total && total}px;
+  width: 100%;
   height: 10px;
   background-color: transparent;
   border-radius: 5px;
