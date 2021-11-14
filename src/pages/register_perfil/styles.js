@@ -1,9 +1,19 @@
 import styled from 'styled-components';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+`;
+
+export const ContainerLoading = styled.div`
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100vh;
 `;
 
 export const Title = styled.h1`
@@ -13,6 +23,15 @@ export const Title = styled.h1`
   line-height: 35px;
   margin-bottom: 20px;
   padding: 20px 45px;
+`;
+
+export const Error = styled.h3`
+  font-weight: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 20px;
+  line-height: 25px;
+  text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.colors.red};
 `;
 
 export const Subtitle = styled.small`
@@ -100,28 +119,39 @@ export const Description = styled.p`
   font-family: ${({ theme }) => theme.fonts.medium};
   text-align: left;
 `;
-export const ButtonSubmit = styled.span`
+
+export const Tips = styled.small`
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: ${({ theme }) => theme.fonts.light};
+  font-size: 19px;
+  line-height: 23px;
+`;
+
+export const ContainerInput = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
+  gap: 15px;
+  align-items: flex-start;
+`;
+
+export const Button = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
   &:hover {
-    opacity: 0.5;
+    opacity: 0.7;
   }
 `;
 
-export const ContainerButtonSubmit = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  margin-bottom: 20px;
+export const Unlocked = styled(FaRegEyeSlash)`
+  color: ${({ theme }) => theme.colors.yellow};
+  width: 25px;
+  height: 25px;
 `;
 
-export const TextButton = styled.span`
-  color: ${({ theme }) => theme.colors.gray};
-  font-size: 25px;
-  line-height: 30px;
-  font-weight: ${({ theme }) => theme.fonts.medium};
+export const Locked = styled(FaRegEye)`
+  color: ${({ theme }) => theme.colors.yellow};
+  width: 25px;
+  height: 25px;
 `;

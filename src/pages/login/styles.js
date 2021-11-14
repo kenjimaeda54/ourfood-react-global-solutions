@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
 export const Container = styled.div`
   display: flex;
@@ -75,6 +76,8 @@ export const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: flex-start;
+  gap: 20px;
 `;
 
 export const Input = styled.input`
@@ -173,4 +176,25 @@ export const TextButton = styled.span`
   font-size: 25px;
   line-height: 30px;
   font-weight: ${({ theme }) => theme.fonts.medium};
+`;
+
+export const ButtonTypePassword = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const Unlocked = styled(FaRegEyeSlash)`
+  color: ${({ theme }) => theme.colors.yellow};
+  width: 25px;
+  height: 25px;
+`;
+
+export const Locked = styled(FaRegEye)`
+  color: ${({ theme }) => theme.colors.yellow};
+  width: 25px;
+  height: 25px;
 `;

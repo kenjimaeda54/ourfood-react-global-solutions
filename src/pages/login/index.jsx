@@ -23,6 +23,10 @@ import {
   ContainerButtonSubmit,
   ButtonSubmit,
   TextButton,
+  ButtonTypePassword,
+  Unlocked,
+  Locked,
+  typeInput,
 } from './styles';
 import { useCustomContext } from '../../hooks/useCustomContext';
 
@@ -37,6 +41,7 @@ export function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [tips, setTips] = useState(true);
+  const [typeInput, setTypeInput] = useState('password');
 
   function handleLocationState() {
     if (location.state !== undefined) {
@@ -92,12 +97,18 @@ export function Login() {
 
   const handleBlur = () => setTips(false);
 
-  console.log(tips);
-
   useEffect(() => {
     handleLocationState();
     emailRef.current?.focus();
   }, []);
+
+  function handleTypeInput() {
+    if (typeInput === 'password') {
+      setTypeInput('text');
+    } else {
+      setTypeInput('password');
+    }
+  }
 
   return (
     <Container>
@@ -129,8 +140,8 @@ export function Login() {
             </ContainerText>
             <WrapLogin>
               {error.length > 3 && <Error>{error}</Error>}
-              <Label>Email</Label>
               <ContainerInput>
+                <Label>Email</Label>
                 <Input
                   value={emailField}
                   onFocus={handleFocus}
@@ -145,14 +156,20 @@ export function Login() {
                   <Tips>Apos concluir este campo pode digitar enter.</Tips>
                 )}
               </ContainerInput>
-              <Label>Senha</Label>
-              <Input
-                ref={passwordRef}
-                autoFocus
-                value={passwordField}
-                onChange={(e) => setPasswordField(e.target.value)}
-                placeholder="1234adf"
-              />
+              <ContainerInput>
+                <Label>Senha</Label>
+                <Input
+                  type={typeInput}
+                  ref={passwordRef}
+                  autoFocus
+                  value={passwordField}
+                  onChange={(e) => setPasswordField(e.target.value)}
+                  placeholder="1234adf"
+                />
+                <ButtonTypePassword onClick={handleTypeInput}>
+                  {typeInput === 'password' ? <Unlocked /> : <Locked />}
+                </ButtonTypePassword>
+              </ContainerInput>
               <ButtonSubmit>
                 <ContainerButtonSubmit type="button" onClick={handleLogin}>
                   <TextButton>Entrar</TextButton>
