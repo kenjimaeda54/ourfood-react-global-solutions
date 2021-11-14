@@ -71,6 +71,12 @@ export const Label = styled.label`
   font-weight: ${({ theme }) => theme.fonts.medium};
 `;
 
+export const ContainerInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 export const Input = styled.input`
   background: transparent;
   color: ${({ theme }) => theme.colors.whiteThird};
@@ -88,6 +94,13 @@ export const Input = styled.input`
     font-size: 17px;
     line-height: 19px;
   }
+`;
+
+export const Tips = styled.small`
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: ${({ theme }) => theme.fonts.light};
+  font-size: 19px;
+  line-height: 23px;
 `;
 
 export const ContainerText = styled.div`

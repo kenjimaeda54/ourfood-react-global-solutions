@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { listProducts, keyStorage } from '../../util';
+import { listProducts } from '../../util';
 import { CardProduct } from '../../components/card_product';
 import { Redirect } from 'react-router-dom';
 import {
@@ -19,17 +19,17 @@ import {
   Minus,
   Plus,
 } from './styles';
+import { useCustomContext } from '../../hooks/useCustomContext';
 
 export function Reward() {
+  const { userProfile } = useCustomContext();
   const scrollRef = useRef(null);
   const [value, setValue] = useState(0);
   const [isLogged, setIsLogged] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
   function handleHaveUser() {
-    const getUser = localStorage.getItem(keyStorage);
-    const setUserStorage = getUser ? JSON.parse(getUser) : '';
-    if (setUserStorage === '') {
+    if (userProfile) {
       setRedirect(true);
     } else {
       setIsLogged(true);

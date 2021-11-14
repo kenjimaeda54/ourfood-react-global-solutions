@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, Fragment } from 'react';
 import { CardDonation } from '../../components/card_donation';
 import { CardMission } from '../../components/card_mission';
 import { Loading } from '../../components/loading';
-import { baseUrl, keyStorage } from '../../util';
+import { baseUrl } from '../../util';
 import { Redirect } from 'react-router-dom';
 import {
   Container,
@@ -23,8 +23,10 @@ import {
   Description,
   LinkText,
 } from './styles';
+import { useCustomContext } from '../../hooks/useCustomContext';
 
 export function Home() {
+  const { userProfile } = useCustomContext();
   const [orderedList, setOrderedList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mission, setMission] = useState([]);
@@ -43,7 +45,6 @@ export function Home() {
         const responseDonation = await fetch(`${baseUrl}/donations/1`, {
           signal: controller.signal,
         });
-
         const dataUser = await responseUser.json();
         const dataDonation = await responseDonation.json();
         setOrderedList(dataUser.sort((a, b) => b.punctuation - a.punctuation));
@@ -56,6 +57,9 @@ export function Home() {
     }
     getUser();
     return () => {
+      setLoading(true);
+      setOrderedList([]);
+      setMission([]);
       controller.abort();
     };
   }, []);
@@ -70,8 +74,7 @@ export function Home() {
 
   // eslint-disable-next-line no-unused-vars
   function handleNavigate(pathname, text) {
-    const user = sessionStorage.getItem(keyStorage);
-    if (!user) {
+    if (Object.keys(userProfile).length === 0) {
       setRedirect(true);
       setRoute('/login');
       setDescription('Para realizar doação,por favor faça seu login.');

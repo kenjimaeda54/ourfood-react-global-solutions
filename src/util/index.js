@@ -1,4 +1,3 @@
-export const keyStorage = '@KeyUserStorage';
 export const baseUrl = 'http://localhost:8080/uorFood';
 export const keyStorageEmail = '@KeyUserStorageEmail';
 

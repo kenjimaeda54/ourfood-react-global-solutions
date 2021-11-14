@@ -13,6 +13,29 @@ export const Container = styled.div`
   padding: 0px 50px;
 `;
 
+export const ContainerOff = styled.button`
+  border: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
+// export const Button = styled.button`
+//   border: none;
+//   background-color: transparent;
+// `;
+
+export const SmallTitle = styled.small`
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: ${({ theme }) => theme.fonts.light};
+  font-size: 13px;
+  line-height: 17px;
+`;
+
 export const ContainerUser = styled.div`
   display: flex;
   align-items: center;
@@ -65,7 +88,7 @@ export const Anchor = styled(Link)`
 `;
 
 export const Logout = styled(BsPower)`
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   color: ${({ theme }) => theme.colors.white};
 `;

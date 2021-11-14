@@ -1,8 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react';
-import { keyStorage } from '../../util';
+import { useCustomContext } from '../../hooks/useCustomContext';
+import { keyStorageEmail } from '../../util';
 import {
   Container,
   ContainerUser,
+  ContainerOff,
+  SmallTitle,
   Logout,
   TitleName,
   Photo,
@@ -13,37 +16,50 @@ import {
 } from './styles';
 
 export function Header() {
+  const { userProfile } = useCustomContext();
+  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState({});
   const [haveUser, setHaveUser] = useState(false);
+  const [mouse, setMouse] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const getName = sessionStorage.getItem(keyStorage);
-    const setUserName = getName ? JSON.parse(getName) : '';
-    if (setUserName === '') {
-      setHaveUser(false);
-    } else {
+    if (!mounted && Object.keys(userProfile).length > 0) {
       setHaveUser(true);
-      const { name, punctuation, link } = setUserName;
-      setUser({
-        name,
-        link,
-        punctuation,
-      });
     }
-  }, []);
+    return () => {
+      setMounted(true);
+    };
+  }, [userProfile]);
+
+  const handleShowMessage = () => setMouse(true);
+
+  const handleHiddenMessage = () => setMouse(false);
+
+  function handleGoOut() {
+    localStorage.removeItem(keyStorageEmail);
+    window.location = '/';
+  }
 
   return (
     <Container>
       {haveUser ? (
         <Fragment>
           <ContainerUser>
-            <Logout />
-            <Photo src={user.link} width={20} height={20} />
-            <TitleName>{name}</TitleName>
+            <Photo src={userProfile.photo} width={20} height={20} />
+            <ContainerOff
+              onMouseOut={handleHiddenMessage}
+              onMouseOver={() => handleShowMessage(1)}
+              onClick={handleGoOut}
+            >
+              {mouse && <SmallTitle>Sair?</SmallTitle>}
+              <Logout />
+            </ContainerOff>
+            <TitleName>{userProfile.name}</TitleName>
           </ContainerUser>
           <ContainerPunctuation>
             <SubTitle>Pontos:</SubTitle>
-            <Punctuation>0</Punctuation>
+            <Punctuation>{userProfile.punctuation}</Punctuation>
           </ContainerPunctuation>
         </Fragment>
       ) : (

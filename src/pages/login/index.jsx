@@ -1,14 +1,17 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef, useEffect, useState, Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { baseUrl } from '../../util';
+import { baseUrl, keyStorageEmail } from '../../util';
 import { Loading } from '../../components/loading';
 import {
   Container,
   ContainerLoading,
   Error,
   Title,
+  Tips,
   Subtitle,
   ContainerLogin,
+  ContainerInput,
   WrapLogin,
   Label,
   Input,
@@ -21,16 +24,19 @@ import {
   ButtonSubmit,
   TextButton,
 } from './styles';
+import { useCustomContext } from '../../hooks/useCustomContext';
 
 export function Login() {
+  const { handleUserProfile } = useCustomContext();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [emailField, setEmailField] = useState('');
+  const [passwordField, setPasswordField] = useState('');
   const location = useLocation();
   const [locationState, setLocationState] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
+  const [tips, setTips] = useState(true);
 
   function handleLocationState() {
     if (location.state !== undefined) {
@@ -44,15 +50,29 @@ export function Login() {
     const controller = new AbortController();
     setLoading(true);
     try {
-      const response = await fetch(`${baseUrl}/users/email=${email}`, {
+      const response = await fetch(`${baseUrl}/users/email=${emailField}`, {
         signal: controller.signal,
       });
       const data = await response.json();
       if (data.length === 0) {
-        setError(true);
+        return setError('Seu email esta incorreto.');
+      }
+      const { password, id, photo, punctuation, donation, name } = data.find(
+        (user) => user.email === emailField,
+      );
+      if (password !== passwordField) {
+        return setError('Sua senha esta incorreta.');
       } else {
-        const password = data.find((user) => user.password === password);
-        console.log(password);
+        localStorage.setItem(keyStorageEmail, JSON.stringify(emailField));
+        const perfilUser = {
+          id,
+          photo,
+          punctuation,
+          donation,
+          name,
+        };
+        handleUserProfile(perfilUser);
+        return (window.location.href = '/perfil');
       }
     } catch (error) {
       console.log(error);
@@ -63,10 +83,16 @@ export function Login() {
 
   function handleKeyboard(event) {
     if (event.keyCode === 13) {
+      setTips(false);
       emailRef.current?.blur();
       passwordRef.current?.focus();
     }
   }
+  const handleFocus = () => setTips(true);
+
+  const handleBlur = () => setTips(false);
+
+  console.log(tips);
 
   useEffect(() => {
     handleLocationState();
@@ -102,22 +128,29 @@ export function Login() {
               </Link>
             </ContainerText>
             <WrapLogin>
-              {error && <Error>Confira seus dados e digite novamente</Error>}
+              {error.length > 3 && <Error>{error}</Error>}
               <Label>Email</Label>
-              <Input
-                value={email}
-                onKeyDown={(event) => handleKeyboard(event)}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="joaoxxx@gmail.com"
-                autoFocus
-                ref={emailRef}
-              />
+              <ContainerInput>
+                <Input
+                  value={emailField}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  onKeyDown={(event) => handleKeyboard(event)}
+                  onChange={(e) => setEmailField(e.target.value)}
+                  placeholder="joaoxxx@gmail.com"
+                  autoFocus
+                  ref={emailRef}
+                />
+                {emailField.length > 3 && tips && (
+                  <Tips>Apos concluir este campo pode digitar enter.</Tips>
+                )}
+              </ContainerInput>
               <Label>Senha</Label>
               <Input
                 ref={passwordRef}
                 autoFocus
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={passwordField}
+                onChange={(e) => setPasswordField(e.target.value)}
                 placeholder="1234adf"
               />
               <ButtonSubmit>

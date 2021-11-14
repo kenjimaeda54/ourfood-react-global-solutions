@@ -2,8 +2,9 @@
 import React, { useEffect, useState, useRef, Fragment } from 'react';
 import { CardMission } from '../../components/card_mission';
 import { Loading } from '../../components/loading';
-import { baseUrl, keyStorage } from '../../util';
+import { baseUrl } from '../../util';
 import { Redirect } from 'react-router-dom';
+import { useCustomContext } from '../../hooks/useCustomContext';
 import {
   Container,
   ContainerLoading,
@@ -13,6 +14,7 @@ import {
 } from './styles';
 
 export function Donation() {
+  const { userProfile } = useCustomContext();
   const [donation, setDonation] = useState([]);
   const [loading, setLoading] = useState(true);
   const [redirect, setRedirect] = useState(false);
@@ -40,15 +42,13 @@ export function Donation() {
   }, []);
 
   function handleNavigate(pathname, id) {
-    const user = sessionStorage.getItem(keyStorage);
-    if (!user) {
+    if (Object.keys(userProfile).length === 0) {
       setRedirect(true);
       setRoute('/login');
       setDescription('Para realizar doação,por favor faça seu login.');
       return;
     }
     setRedirect(true);
-    console.log(handleDescriptionRoute(id));
     setDescription(handleDescriptionRoute(id));
     setRoute(pathname);
   }
