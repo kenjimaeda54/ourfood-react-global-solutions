@@ -3,6 +3,7 @@ import { useCustomContext } from '../../hooks/useCustomContext';
 import { keyStorageEmail } from '../../util';
 import {
   Container,
+  LinkButton,
   ContainerUser,
   ContainerOff,
   SmallTitle,
@@ -46,7 +47,9 @@ export function Header() {
       {haveUser ? (
         <Fragment>
           <ContainerUser>
-            <Photo src={userProfile.photo} width={20} height={20} />
+            <LinkButton to="/perfil">
+              <Photo src={userProfile.photo} width={20} height={20} />
+            </LinkButton>
             <ContainerOff
               onMouseOut={handleHiddenMessage}
               onMouseOver={() => handleShowMessage(1)}

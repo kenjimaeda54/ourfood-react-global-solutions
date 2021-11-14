@@ -8,6 +8,7 @@ function UserProvider({ children }) {
   const [userProfile, setUserProfile] = useState({});
 
   useEffect(() => {
+    const controller = new AbortController();
     (async () => {
       try {
         const fetchStorage = localStorage.getItem(keyStorageEmail);
@@ -15,6 +16,7 @@ function UserProvider({ children }) {
         if (emailStorage.length > 3) {
           const userResponse = await fetch(
             `${baseUrl}/users/email=${emailStorage}`,
+            { signal: controller.signal },
           );
           const user = await userResponse.json();
           const { id, photo, punctuation, donation, name, email, password } =
@@ -34,6 +36,8 @@ function UserProvider({ children }) {
         console.log(error);
       }
     })();
+
+    return () => controller.abort();
   }, []);
 
   const handleUserProfile = (userProfile) => setUserProfile(userProfile);

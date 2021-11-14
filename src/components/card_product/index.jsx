@@ -1,5 +1,11 @@
 import React from 'react';
-import { Container, Title, WrapTitle, Punctuation } from './styles';
+import {
+  Container,
+  Title,
+  WrapTitle,
+  Punctuation,
+  ContainerChildren,
+} from './styles';
 
 // eslint-disable-next-line react/prop-types
 export function CardProduct({ name, photo, punctuation, children }) {
@@ -15,9 +21,9 @@ export function CardProduct({ name, photo, punctuation, children }) {
       />
       <WrapTitle>
         <Title>{name}</Title>
-        <Punctuation>Pontuação: {punctuation}</Punctuation>
-        {children}
+        {punctuation && <Punctuation>{punctuation}</Punctuation>}
       </WrapTitle>
+      <ContainerChildren>{children}</ContainerChildren>
     </Container>
   );
 }

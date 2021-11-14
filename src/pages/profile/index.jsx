@@ -2,8 +2,10 @@
 import React, { useEffect, useState, Fragment, useRef } from 'react';
 import { useCustomContext } from '../../hooks/useCustomContext';
 import { Loading } from '../../components/loading';
+import { Link } from 'react-router-dom';
 import {
   Container,
+  SectionPhoto,
   ContainerLoading,
   ContainerInput,
   Button,
@@ -20,14 +22,17 @@ import {
   FooterValue,
   SubTitleFooter,
   TitleFooter,
+  ButtonDonation,
+  TextDonation,
 } from './styles';
+import { baseUrl } from '../../util';
 
 export function Profile() {
   const { userProfile } = useCustomContext();
-  const [email, setEmail] = useState('');
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [photo, setPhoto] = useState('');
   const [punctuation, setPunctuation] = useState('');
@@ -37,6 +42,9 @@ export function Profile() {
   const [loading, setLoading] = useState(true);
   const [typeInput, setTypeInput] = useState('password');
   const [disable, setDisable] = useState(true);
+  const [isActivity, setIsActivity] = useState(false);
+  const [id, setId] = useState(0);
+  const [salveEdit, setSalveEdit] = useState(false);
 
   useEffect(() => {
     if (!mounted && Object.keys(userProfile).length > 0) {
@@ -60,7 +68,7 @@ export function Profile() {
     setTypeInput('password');
   }
 
-  function handleFocus(type) {
+  function handleMouse(type) {
     switch (type) {
       case 'password':
         passwordRef.current?.focus();
@@ -74,8 +82,60 @@ export function Profile() {
     }
   }
 
-  const handleEdit = () => setDisable(false);
-  const handleBlur = () => setDisable(true);
+  function handleEdit(id) {
+    setDisable(false);
+    setIsActivity(true);
+    setId(id);
+  }
+  function handleBlur() {
+    setDisable(true);
+    setIsActivity(false);
+    if (
+      email !== userProfile.email ||
+      password !== userProfile.password ||
+      name !== userProfile.name
+    ) {
+      setSalveEdit(true);
+    } else {
+      setSalveEdit(false);
+    }
+  }
+
+  function handleKey(event) {
+    if (event.keyCode === 13) {
+      passwordRef.current?.blur();
+      emailRef.current?.blur();
+      nameRef.current?.blur();
+      return;
+    }
+  }
+
+  async function handleChange() {
+    try {
+      setLoading(true);
+      const profile = {
+        email,
+        password,
+        name,
+        photo,
+        punctuation,
+        donation,
+      };
+      await fetch(`${baseUrl}/users/${userProfile.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify(profile),
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      window.location.href = '/';
+      setLoading(false);
+    }
+  }
 
   return (
     <Container>
@@ -86,22 +146,35 @@ export function Profile() {
       ) : (
         <Fragment>
           <Section>
-            <Photo src={userProfile.photo} />
+            <SectionPhoto>
+              <Photo src={userProfile.photo} />
+
+              {salveEdit && (
+                <ButtonDonation onClick={handleChange}>
+                  <TextDonation>Salvar alterações </TextDonation>
+                </ButtonDonation>
+              )}
+            </SectionPhoto>
             <ContainerField>
               <ContainerInput>
                 <TitleField>Nome:</TitleField>
                 <Input
+                  isActivity={isActivity && id === 1}
                   autoFocus
                   disabled={disable}
                   onBlur={handleBlur}
+                  onKeyDown={(e) => handleKey(e)}
                   ref={nameRef}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
+                {!disable && id === 1 && (
+                  <TitleField>Apos concluir digitar enter</TitleField>
+                )}
                 <Button
-                  onMouseOut={() => handleFocus('name')}
-                  onMouseOver={() => handleFocus('name')}
-                  onClick={handleEdit}
+                  onMouseOut={() => handleMouse('name')}
+                  onMouseOver={() => handleMouse('name')}
+                  onClick={() => handleEdit(1)}
                 >
                   <Edit />
                 </Button>
@@ -109,17 +182,22 @@ export function Profile() {
               <ContainerInput>
                 <TitleField>Email:</TitleField>
                 <Input
+                  isActivity={isActivity && id === 2}
                   autoFocus
                   disabled={disable}
                   onBlur={handleBlur}
+                  onKeyDown={(e) => handleKey(e)}
                   ref={emailRef}
                   value={email}
-                  onChange={(e) => setEmail(e.target.email)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
+                {!disable && id === 2 && (
+                  <TitleField>Apos concluir digitar enter</TitleField>
+                )}
                 <Button
-                  onMouseOut={() => handleFocus('email')}
-                  onMouseOver={() => handleFocus('email')}
-                  onClick={handleEdit}
+                  onMouseOut={() => handleMouse('email')}
+                  onMouseOver={() => handleMouse('email')}
+                  onClick={() => handleEdit(2)}
                 >
                   <Edit />
                 </Button>
@@ -127,19 +205,24 @@ export function Profile() {
               <ContainerInput>
                 <TitleField>Password:</TitleField>
                 <Input
+                  isActivity={isActivity && id === 3}
                   autoFocus
                   disabled={disable}
                   ref={passwordRef}
                   onBlur={handleBlur}
+                  onKeyDown={(e) => handleKey(e)}
                   type={typeInput}
                   value={password}
-                  onChange={(e) => setPassword(e.target.password)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
+                {!disable && id === 3 && (
+                  <TitleField>Apos concluir digitar enter</TitleField>
+                )}
                 <ContainerIcon>
                   <Button
-                    onMouseOut={() => handleFocus('password')}
-                    onMouseOver={() => handleFocus('password')}
-                    onClick={handleEdit}
+                    onMouseOut={() => handleMouse('password')}
+                    onMouseOver={() => handleMouse('password')}
+                    onClick={() => handleEdit(3)}
                   >
                     <Edit />
                   </Button>
@@ -158,6 +241,11 @@ export function Profile() {
                   <SubTitleFooter>{punctuation}</SubTitleFooter>
                 </FooterValue>
               </Footer>
+              <Link to="/perfil/doacao" style={{ textDecoration: 'none' }}>
+                <ButtonDonation>
+                  <TextDonation>Doações </TextDonation>
+                </ButtonDonation>
+              </Link>
             </ContainerField>
           </Section>
         </Fragment>

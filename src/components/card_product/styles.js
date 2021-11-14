@@ -43,3 +43,9 @@ export const Punctuation = styled.span`
   font-size: 15px;
   line-height: 20px;
 `;
+
+export const ContainerChildren = styled.div`
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0px 10px;
+`;

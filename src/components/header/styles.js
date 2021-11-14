@@ -24,10 +24,12 @@ export const ContainerOff = styled.button`
   }
 `;
 
-// export const Button = styled.button`
-//   border: none;
-//   background-color: transparent;
-// `;
+export const LinkButton = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    opacity: 0.5;
+  }
+`;
 
 export const SmallTitle = styled.small`
   color: ${({ theme }) => theme.colors.white};

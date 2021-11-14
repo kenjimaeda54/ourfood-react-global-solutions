@@ -17,6 +17,12 @@ export const Section = styled.div`
   align-items: center;
 `;
 
+export const SectionPhoto = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
 export const ContainerLoading = styled.div`
   display: flex;
   overflow: hidden;
@@ -61,6 +67,10 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.colors.whiteVariant};
   font-size: 23px;
   line-height: 28px;
+  border-bottom-width: ${({ isActivity }) => (isActivity ? 2 : 0)}px;
+  border-bottom-color: ${({ isActivity, theme }) =>
+    isActivity ? theme.colors.red : 'transparent'};
+  border-bottom-style: solid;
 `;
 
 export const ContainerIcon = styled.div`
@@ -126,3 +136,24 @@ export const SubTitleFooter = styled.span`
 `;
 
 export const TitleFooter = styled(TitleField)``;
+
+export const ButtonDonation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.lightBlue};
+  padding: 19px 0px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const TextDonation = styled.small`
+  font-weight: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 17px;
+  line-height: 20px;
+`;
