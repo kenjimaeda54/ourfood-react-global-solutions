@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { keyStorageEmail } from '../../util';
 import {
   Container,
   Title,
@@ -18,6 +19,7 @@ import {
 export function Aside() {
   const [mouse, setMouse] = useState(false);
   const [id, setId] = useState(0);
+  const [haveUser, setHaveUser] = useState(false);
 
   function handleHiddenMessage() {
     setId(0);
@@ -29,15 +31,15 @@ export function Aside() {
     setMouse(true);
   }
 
-  // useEffect(() => {
-  //   const getUser = localStorage.getItem(keyStorage);
-  //   const setUserStorage = getUser ? JSON.parse(getUser) : ' ';
-  //   if (setUserStorage === '') {
-  //     setHaveUser(false);
-  //   } else {
-  //     setHaveUser(true);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const getUser = localStorage.getItem(keyStorageEmail);
+    const setUserStorage = getUser ? JSON.parse(getUser) : '';
+    if (setUserStorage === '') {
+      setHaveUser(false);
+    } else {
+      setHaveUser(true);
+    }
+  }, []);
 
   return (
     <Container>
@@ -82,7 +84,7 @@ export function Aside() {
           onMouseOver={() => handleShowMessage(3)}
         >
           <Link
-            to="/cadastro"
+            to={haveUser ? '/cadastro/companhia' : '/cadastro'}
             style={{
               textDecoration: 'none',
             }}

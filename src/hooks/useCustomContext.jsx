@@ -13,15 +13,15 @@ function UserProvider({ children }) {
       try {
         const fetchStorage = localStorage.getItem(keyStorageEmail);
         const emailStorage = fetchStorage ? JSON.parse(fetchStorage) : ' ';
-        if (emailStorage.length > 3) {
-          const userResponse = await fetch(
-            `${baseUrl}/users/email=${emailStorage}`,
-            { signal: controller.signal },
-          );
-          const user = await userResponse.json();
+        const userResponse = await fetch(
+          `${baseUrl}/users/email=${emailStorage}`,
+          { signal: controller.signal },
+        );
+        const user = await userResponse.json();
+        if (emailStorage.length > 3 && user.length > 0) {
           const { id, photo, punctuation, donation, name, email, password } =
             user.find((user) => user.email === emailStorage);
-          const userProfile = {
+          return setUserProfile({
             id,
             photo,
             punctuation,
@@ -29,8 +29,33 @@ function UserProvider({ children }) {
             name,
             email,
             password,
-          };
-          return setUserProfile(userProfile);
+          });
+        } else {
+          const userEmail = await fetch(
+            `${baseUrl}/companies/${emailStorage}`,
+            { signal: controller.signal },
+          );
+          const company = await userEmail.json();
+          const {
+            id,
+            photo,
+            punctuation,
+            donation,
+            name,
+            email,
+            password,
+            userId,
+          } = company.find((user) => user.email === emailStorage);
+          return setUserProfile({
+            id,
+            photo,
+            punctuation,
+            donation,
+            name,
+            email,
+            password,
+            userId,
+          });
         }
       } catch (error) {
         console.log(error);

@@ -128,7 +128,9 @@ export function Login() {
               <TitleText>Login</TitleText>
               <div>
                 <Description>
-                  Seja bem vindo, vamos acabar com a fome do mundo juntos.
+                  Seja bem vindo, vamos acabar com a fome do mundo juntos. Mesmo
+                  que possua empresa,seu login continuara sendo o registrado no
+                  perfil
                 </Description>
                 {locationState && (
                   <DescriptionColor> {locationState}</DescriptionColor>
