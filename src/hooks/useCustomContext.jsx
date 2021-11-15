@@ -43,7 +43,7 @@ function UserProvider({ children }) {
             donation,
             name,
             email,
-            password,
+            show,
             userId,
           } = company.find((user) => user.email === emailStorage);
           return setUserProfile({
@@ -53,7 +53,7 @@ function UserProvider({ children }) {
             donation,
             name,
             email,
-            password,
+            show,
             userId,
           });
         }

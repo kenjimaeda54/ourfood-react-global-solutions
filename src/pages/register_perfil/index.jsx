@@ -99,7 +99,6 @@ export function RegisterProfile() {
   }
 
   function handleKey(event, type) {
-    console.log(type);
     if (event.keyCode === 13 && type === 'name') {
       nameRef.current?.blur();
       emailRef.current?.focus();

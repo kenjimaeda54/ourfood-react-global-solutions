@@ -24,6 +24,9 @@ import {
   TitleFooter,
   ButtonDonation,
   TextDonation,
+  ContainerProfile,
+  ContainerFooter,
+  ButtonPerfil,
 } from './styles';
 import { baseUrl } from '../../util';
 
@@ -49,7 +52,7 @@ export function Profile() {
   useEffect(() => {
     if (!mounted && Object.keys(userProfile).length > 0) {
       setPhoto(userProfile.photo);
-      setPassword(userProfile.password);
+      setPassword(userProfile?.password);
       setPunctuation(userProfile.punctuation);
       setDonation(userProfile.donation);
       setName(userProfile.name);
@@ -113,26 +116,67 @@ export function Profile() {
   async function handleChange() {
     try {
       setLoading(true);
-      const profile = {
-        email,
-        password,
-        name,
-        photo,
-        punctuation,
-        donation,
-      };
-      await fetch(`${baseUrl}/users/${userProfile.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      if (password) {
+        const profile = {
+          email,
+          password,
+          name,
+          photo,
+          punctuation,
+          donation,
+        };
+        await fetch(`${baseUrl}/users/${userProfile.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
 
-        body: JSON.stringify(profile),
-      });
+          body: JSON.stringify(profile),
+        });
+      } else {
+        const profile = {
+          email,
+          name,
+          photo,
+          punctuation,
+          donation,
+          show: userProfile.show,
+          userId: userProfile.userId,
+        };
+        await fetch(`${baseUrl}/companies/${userProfile.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify(profile),
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
       window.location.href = '/';
+      setLoading(false);
+    }
+  }
+
+  async function handleProfile() {
+    try {
+      setLoading(true);
+      const response = await fetch(`${baseUrl}/users/id=${userProfile.userId}`);
+      const data = await response.json();
+      const { photo, password, punctuation, donation, name, email } = data.find(
+        (it) => it.id === userProfile.userId,
+      );
+      setPhoto(photo);
+      setPassword(password);
+      setPunctuation(punctuation);
+      setDonation(donation);
+      setName(name);
+      setEmail(email);
+    } catch (error) {
+      console.log(error);
+    } finally {
       setLoading(false);
     }
   }
@@ -202,44 +246,66 @@ export function Profile() {
                   <Edit />
                 </Button>
               </ContainerInput>
-              <ContainerInput>
-                <TitleField>Password:</TitleField>
-                <Input
-                  isActivity={isActivity && id === 3}
-                  autoFocus
-                  disabled={disable}
-                  ref={passwordRef}
-                  onBlur={handleBlur}
-                  onKeyDown={(e) => handleKey(e)}
-                  type={typeInput}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {!disable && id === 3 && (
-                  <TitleField>Apos concluir digitar enter</TitleField>
-                )}
-                <ContainerIcon>
-                  <Button
-                    onMouseOut={() => handleMouse('password')}
-                    onMouseOver={() => handleMouse('password')}
-                    onClick={() => handleEdit(3)}
-                  >
-                    <Edit />
-                  </Button>
-                  <Button onClick={handlePassword}>
-                    {typeInput === 'password' ? <Unlocked /> : <Locked />}
-                  </Button>
-                </ContainerIcon>
-              </ContainerInput>
+              {password && (
+                <ContainerInput>
+                  <TitleField>Password:</TitleField>
+                  <Input
+                    isActivity={isActivity && id === 3}
+                    autoFocus
+                    disabled={disable}
+                    ref={passwordRef}
+                    onBlur={handleBlur}
+                    onKeyDown={(e) => handleKey(e)}
+                    type={typeInput}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  {!disable && id === 3 && (
+                    <TitleField>Apos concluir digitar enter</TitleField>
+                  )}
+                  <ContainerIcon>
+                    <Button
+                      onMouseOut={() => handleMouse('password')}
+                      onMouseOver={() => handleMouse('password')}
+                      onClick={() => handleEdit(3)}
+                    >
+                      <Edit />
+                    </Button>
+                    <Button onClick={handlePassword}>
+                      {typeInput === 'password' ? <Unlocked /> : <Locked />}
+                    </Button>
+                  </ContainerIcon>
+                </ContainerInput>
+              )}
               <Footer>
-                <FooterValue>
-                  <TitleFooter>Doações:</TitleFooter>
-                  <SubTitleFooter>{donation}</SubTitleFooter>
-                </FooterValue>
-                <FooterValue>
-                  <TitleFooter>Pontuações:</TitleFooter>
-                  <SubTitleFooter>{punctuation}</SubTitleFooter>
-                </FooterValue>
+                {password ? (
+                  <Fragment>
+                    <FooterValue>
+                      <TitleFooter>Doações:</TitleFooter>
+                      <SubTitleFooter>{donation}</SubTitleFooter>
+                    </FooterValue>
+                    <FooterValue>
+                      <TitleFooter>Pontuações:</TitleFooter>
+                      <SubTitleFooter>{punctuation}</SubTitleFooter>
+                    </FooterValue>
+                  </Fragment>
+                ) : (
+                  <ContainerProfile>
+                    <ContainerFooter>
+                      <FooterValue>
+                        <TitleFooter>Doações:</TitleFooter>
+                        <SubTitleFooter>{donation}</SubTitleFooter>
+                      </FooterValue>
+                      <FooterValue>
+                        <TitleFooter>Pontuações:</TitleFooter>
+                        <SubTitleFooter>{punctuation}</SubTitleFooter>
+                      </FooterValue>
+                    </ContainerFooter>
+                    <ButtonPerfil onClick={handleProfile}>
+                      <TextDonation>Seu perfil </TextDonation>
+                    </ButtonPerfil>
+                  </ContainerProfile>
+                )}
               </Footer>
               <Link to="/perfil/doacao" style={{ textDecoration: 'none' }}>
                 <ButtonDonation>

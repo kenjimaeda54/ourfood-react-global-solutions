@@ -137,7 +137,36 @@ export const SubTitleFooter = styled.span`
 
 export const TitleFooter = styled(TitleField)``;
 
+export const ContainerProfile = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+`;
+
+export const ContainerFooter = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const ButtonDonation = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.lightBlue};
+  padding: 19px 0px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export const ButtonPerfil = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;

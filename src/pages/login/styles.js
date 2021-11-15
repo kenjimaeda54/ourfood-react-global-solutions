@@ -167,7 +167,6 @@ export const ContainerButtonSubmit = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
   margin-bottom: 20px;
 `;
 

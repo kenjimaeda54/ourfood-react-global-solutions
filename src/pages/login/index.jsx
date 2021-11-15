@@ -31,7 +31,7 @@ import {
 import { useCustomContext } from '../../hooks/useCustomContext';
 
 export function Login() {
-  const { handleUserProfile } = useCustomContext();
+  // const { handleUserProfile } = useCustomContext();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [emailField, setEmailField] = useState('');
@@ -62,22 +62,25 @@ export function Login() {
       if (data.length === 0) {
         return setError('Seu email esta incorreto.');
       }
-      const { password, id, photo, punctuation, donation, name } = data.find(
-        (user) => user.email === emailField,
-      );
+      const { password, id } = data.find((user) => user.email === emailField);
       if (password !== passwordField) {
         return setError('Sua senha esta incorreta.');
+      }
+      const fetchCompany = await fetch(`${baseUrl}/companies`, {
+        signal: controller.signal,
+      });
+      const company = await fetchCompany.json();
+      console.log(company);
+      const companyProfile = company.filter((it) => it.userId === id);
+      if (companyProfile.length > 0) {
+        const { email } = companyProfile.find((it) => it.show === 1);
+        localStorage.setItem(keyStorageEmail, JSON.stringify(email));
+        window.location.href = '/';
+        return setLoading(false);
       } else {
         localStorage.setItem(keyStorageEmail, JSON.stringify(emailField));
-        const perfilUser = {
-          id,
-          photo,
-          punctuation,
-          donation,
-          name,
-        };
-        handleUserProfile(perfilUser);
-        return (window.location.href = '/perfil');
+        window.location.href = '/';
+        return setLoading(false);
       }
     } catch (error) {
       console.log(error);

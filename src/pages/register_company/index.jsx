@@ -32,7 +32,6 @@ import {
 export function RegisterCompany() {
   const nameRef = useRef(null);
   const { userProfile } = useCustomContext();
-  const passwordRef = useRef(null);
   const emailRef = useRef(null);
   const photoRef = useRef(null);
   const [tips, setTips] = useState(false);
@@ -65,10 +64,10 @@ export function RegisterCompany() {
       handleWithStorage();
       const profile = {
         name: nameRef.current.value,
-        password: passwordRef.current.value,
         email: emailRef.current.value,
         photo: photoRef.current.value,
         userId: userProfile.id,
+        show: isSelect,
       };
 
       await fetch(`${baseUrl}/companies`, {
@@ -101,14 +100,12 @@ export function RegisterCompany() {
   function handleValidate() {
     if (
       nameRef.current?.value === '' ||
-      passwordRef.current?.value === '' ||
       emailRef.current?.value === '' ||
       photoRef.current?.value === ''
     ) {
       return 'Preencha todos os campos';
     } else if (
       nameRef.current?.value.length.length < 3 ||
-      passwordRef.current?.value.length < 6 ||
       emailRef.current?.value.length < 5 ||
       photoRef.current?.value.length < 5 ||
       isSelect === 0
@@ -167,36 +164,35 @@ export function RegisterCompany() {
                   empresa
                 </Description>
                 <Description>
-                  Não esquece de escolhe o perfil que deseja ser divulgado.
-                </Description>
-                <Description>
-                  Apos optar por divulgar os dados de nome, foto e pontos da
-                  empresa não poderá escolher novamente perfil pessoal ,
-                  inclusive sera este perfil apresentado na tela inicial
+                  Apos optar por divulgar os dados da companhia não poderá
+                  escolher novamente perfil pessoal , inclusive sera este perfil
+                  apresentado na tela inicial
                 </Description>
               </div>
             </ContainerText>
             <WrapLogin>
               {error.length > 3 && <Error>{error}</Error>}
-              <ContainerButtonSelect>
-                <TextSelect>Deseja divulgar sua empresa?</TextSelect>
-                <SectionOption>
-                  <ContainerOption>
-                    <TextOption>Sim</TextOption>
-                    <ButtonSelect
-                      isSelected={isSelect === 1}
-                      onClick={() => handleSelectProfile(1)}
-                    />
-                  </ContainerOption>
-                  <ContainerOption>
-                    <TextOption>Não</TextOption>
-                    <ButtonSelect
-                      isSelected={isSelect === 2}
-                      onClick={() => handleSelectProfile(2)}
-                    />
-                  </ContainerOption>
-                </SectionOption>
-              </ContainerButtonSelect>
+              {userProfile.show !== 1 && (
+                <ContainerButtonSelect>
+                  <TextSelect>Deseja divulgar sua empresa?</TextSelect>
+                  <SectionOption>
+                    <ContainerOption>
+                      <TextOption>Sim</TextOption>
+                      <ButtonSelect
+                        isSelected={isSelect === 1}
+                        onClick={() => handleSelectProfile(1)}
+                      />
+                    </ContainerOption>
+                    <ContainerOption>
+                      <TextOption>Não</TextOption>
+                      <ButtonSelect
+                        isSelected={isSelect === 2}
+                        onClick={() => handleSelectProfile(2)}
+                      />
+                    </ContainerOption>
+                  </SectionOption>
+                </ContainerButtonSelect>
+              )}
               <ContainerInput>
                 <Label>Name</Label>
                 <Input
