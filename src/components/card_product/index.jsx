@@ -21,7 +21,9 @@ export function CardProduct({ name, photo, punctuation, children }) {
       />
       <WrapTitle>
         <Title>{name}</Title>
-        {punctuation && <Punctuation>{punctuation}</Punctuation>}
+        {punctuation && (
+          <Punctuation>Pontos exigidos:{punctuation}</Punctuation>
+        )}
       </WrapTitle>
       <ContainerChildren>{children}</ContainerChildren>
     </Container>

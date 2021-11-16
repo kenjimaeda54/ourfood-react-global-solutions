@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { HiPlusSm } from 'react-icons/hi';
-import { FiMinus } from 'react-icons/fi';
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 100%;
 `;
 
 export const Title = styled.h1`
@@ -76,15 +75,46 @@ export const ButtonScroll = styled.button`
 `;
 
 export const ContainerCardProduct = styled.div`
+  height: 100%;
   padding-left: 45px;
   padding-right: 10px;
   margin-top: 20px;
   display: flex;
   flex-direction: row;
+  min-height: 600px;
   gap: 20px;
   overflow-y: hidden;
   overflow-x: hidden;
   scroll-behavior: smooth;
+`;
+
+export const ContainerFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  gap: 20px;
+`;
+
+export const ContainerValue = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const ValuePunctuation = styled.span`
+  font-weight: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.yellow};
+  font-size: 20px;
+  line-height: 25px;
+`;
+
+export const ValueTitle = styled.h3`
+  font-weight: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.green};
+  font-size: 20px;
+  line-height: 25px;
 `;
 
 export const Thing = styled.div`
@@ -92,77 +122,15 @@ export const Thing = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
   width: 120px;
   justify-content: space-between;
-  margin-bottom: 10px;
   border-radius: 5px;
   align-items: center;
 `;
 
-export const Button = styled.button`
-  border: none;
-  background-color: transparent;
-  height: 100%;
-  background-color: ${({ theme }) => theme.colors.yellow};
-  border-radius: 4px;
-  transition: transform 0.15s;
-  transform: translateZ(0);
-  transition: 0.6s;
-  overflow: hidden;
-  cursor: pointer;
-  &:focus {
-    outline: 0;
-  }
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.5);
-    width: 60px;
-    height: 100%;
-    left: 0;
-    top: 0;
-    opacity: 0.5;
-    filter: blur(30px);
-    transform: translateX(-100px) skewX(-15deg);
-  }
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    background: rgba(255, 255, 255, 0.2);
-    width: 30px;
-    height: 100%;
-    left: 30px;
-    top: 0;
-    opacity: 0;
-    filter: blur(5px);
-    transform: translateX(-100px) skewX(-15deg);
-  }
-  &:hover {
-    background: ${({ type, theme }) =>
-      type === 'plus' ? theme.colors.green : theme.colors.red};
-  }
-  &:before {
-    transform: translateX(300px) skewX(-15deg);
-    opacity: 0.6;
-    transition: 0.7s;
-  }
-  &:after {
-    transform: translateX(300px) skewX(-15deg);
-    opacity: 1;
-    transition: 0.7s;
-  }
-`;
-
-export const Minus = styled(FiMinus)`
-  color: ${({ theme }) => theme.colors.white};
-  width: 30px;
-  height: 30px;
-`;
-
-export const Plus = styled(HiPlusSm)`
-  color: ${({ theme }) => theme.colors.white};
-  width: 30px;
-  height: 30px;
+export const Small = styled.small`
+  font-weight: ${({ theme }) => theme.fonts.light};
+  color: ${({ theme }) => theme.colors.green};
+  font-size: 13px;
+  line-height: 17px;
 `;
 
 export const Value = styled.span`
@@ -170,4 +138,23 @@ export const Value = styled.span`
   color: ${({ theme }) => theme.colors.yellow};
   font-size: 20px;
   line-height: 25px;
+`;
+
+export const ButtonDonation = styled.button`
+  padding: 10px 2px;
+  opacity: ${({ canChange }) => (canChange ? 1 : 0.5)};
+  border-radius: 4px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.yellow};
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+export const TextButton = styled.span`
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: ${({ theme }) => theme.fonts.medium};
+  font-size: 19px;
+  line-height: 23px;
 `;

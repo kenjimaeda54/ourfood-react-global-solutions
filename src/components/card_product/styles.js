@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   width: 450px;
-  gap: 10px;
+  gap: 20px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0 19px 38px ${({ theme }) => theme.colors.primary},
     0 15px 12px ${({ theme }) => theme.colors.primary};
@@ -20,7 +20,7 @@ export const WrapTitle = styled.div`
   padding: 0px 10px;
   height: 100%;
   gap: 5px;
-  justify-content: space-between;
+  justify-content: space-evenly;
 `;
 
 export const Title = styled.h2`

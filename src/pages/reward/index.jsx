@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useRef, Fragment, useEffect } from 'react';
 import { listProducts } from '../../util';
 import { CardProduct } from '../../components/card_product';
 import { Redirect } from 'react-router-dom';
@@ -13,11 +14,18 @@ import {
   Left,
   ButtonScroll,
   ContainerCardProduct,
+  ContainerValue,
+  ValuePunctuation,
+  ValueTitle,
   Thing,
   Value,
   Button,
   Minus,
   Plus,
+  ContainerFooter,
+  ButtonDonation,
+  TextButton,
+  Small,
 } from './styles';
 import { useCustomContext } from '../../hooks/useCustomContext';
 
@@ -27,21 +35,13 @@ export function Reward() {
   const [value, setValue] = useState(0);
   const [isLogged, setIsLogged] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [idProduct, setIdProduct] = useState(0);
 
   function handleHaveUser() {
-    if (userProfile) {
-      setRedirect(true);
-    } else {
+    if (userProfile.id) {
       setIsLogged(true);
-    }
-  }
-
-  function handleToggle(type) {
-    if (value === 0 && type === 'minus') return;
-    if (type === 'plus') {
-      return setValue((old) => old + 1);
     } else {
-      return setValue((old) => old - 1);
+      setRedirect(true);
     }
   }
 
@@ -51,6 +51,10 @@ export function Reward() {
     } else {
       scrollRef.current.scrollLeft -= 300;
     }
+  }
+
+  function handleChange() {
+    console.log('troquei');
   }
 
   return (
@@ -79,15 +83,27 @@ export function Reward() {
             logged={isLogged}
           >
             {isLogged ? (
-              <Thing>
-                <Button onClick={() => handleToggle('plus')} type={'plus'}>
-                  <Plus />
-                </Button>
-                <Value>{value}</Value>
-                <Button onClick={() => handleToggle('minus')} type={'minus'}>
-                  <Minus />
-                </Button>
-              </Thing>
+              <ContainerFooter>
+                {idProduct === product.id && (
+                  <Small>
+                    Apos selecionado o produto precisa sair e novamente retornar
+                    se deseja selecionar outro.
+                  </Small>
+                )}
+                <ContainerValue>
+                  <ValueTitle>Seus pontos:</ValueTitle>
+                  <ValuePunctuation>{userProfile.punctuation}</ValuePunctuation>
+                </ContainerValue>
+                <ButtonDonation
+                  disabled={
+                    userProfile.punctuation < product.punctuation ? true : false
+                  }
+                  canChange={userProfile.punctuation > product.punctuation}
+                  onClick={handleChange}
+                >
+                  <TextButton>Trocar</TextButton>
+                </ButtonDonation>
+              </ContainerFooter>
             ) : (
               <ButtonAdd onClick={handleHaveUser}>
                 <TextAdd>Trocar os pontos?</TextAdd>
