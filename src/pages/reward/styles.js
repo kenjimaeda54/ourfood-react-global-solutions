@@ -155,9 +155,9 @@ export const ButtonDonation = styled.button`
   border-radius: 4px;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.yellow};
-  cursor: pointer;
+  cursor: ${({ canChange }) => (canChange ? 'pointer' : 'no-drop')};
   &:hover {
-    opacity: 0.8;
+    opacity: ${({ canChange }) => (canChange ? 0.7 : 0.5)};
   }
 `;
 

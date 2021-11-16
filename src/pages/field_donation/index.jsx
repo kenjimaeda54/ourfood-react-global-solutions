@@ -253,7 +253,11 @@ export function FieldDonation() {
                 <Point>Pontos:</Point>
                 <PointReal>{value === 0 ? 0 : value * 3}</PointReal>
               </ContainerPoint>
-              <ButtonSubmit onClick={handleDonate}>
+              <ButtonSubmit
+                canDonation={value > 0}
+                disabled={value > 0 ? false : true}
+                onClick={handleDonate}
+              >
                 <ContainerButtonSubmit>
                   <TextButton>Doar</TextButton>
                 </ContainerButtonSubmit>

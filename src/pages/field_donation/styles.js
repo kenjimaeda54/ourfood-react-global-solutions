@@ -122,7 +122,8 @@ export const ButtonSubmit = styled.button`
   width: 100%;
   border: none;
   background-color: transparent;
-  cursor: pointer;
+  cursor: ${({ canDonation }) => (canDonation ? 'pointer' : 'no-drop')};
+  opacity: ${({ canDonation }) => (canDonation ? 1 : 0.5)};
   &:hover {
     opacity: 0.5;
   }
