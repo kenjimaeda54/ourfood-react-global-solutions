@@ -58,9 +58,10 @@ export function FieldDonation() {
             `${baseUrl}/users/id=${userProfile.userId}`,
           );
           const data = await response.json();
-          const { name, email, password, punctuation, donation, photo } =
+          const { id, name, email, password, punctuation, donation, photo } =
             data.find((it) => it.id === userProfile.userId);
           return setPersonalProfile({
+            id,
             name,
             email,
             password,

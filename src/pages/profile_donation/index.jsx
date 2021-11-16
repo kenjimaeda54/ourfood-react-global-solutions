@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { Fragment, useEffect, useState } from 'react';
 import { CardProduct } from '../../components/card_product';
+import { Link } from 'react-router-dom';
 import { Loading } from '../../components/loading';
 import { useCustomContext } from '../../hooks/useCustomContext';
 import { baseUrl } from '../../util';
@@ -44,7 +45,9 @@ export function ProfileDonation() {
           );
           return setProductsUser(response.filter((it) => it.userId === id));
         }
-        setProductsUser(response.filter((it) => it.userId === userProfile.id));
+        return setProductsUser(
+          response.filter((it) => it.userId === userProfile.id),
+        );
       } catch (error) {
         console.log(error);
       } finally {
@@ -83,10 +86,16 @@ export function ProfileDonation() {
                     <TitleFooter> Quantidade: </TitleFooter>
                     <SubtitleFooter>{product.quantity}</SubtitleFooter>
                   </WrapTitle>
-
-                  <Button>
-                    <TitleButton>Continuar Doando</TitleButton>
-                  </Button>
+                  <Link
+                    to="/doacao"
+                    style={{
+                      textDecoration: 'none',
+                    }}
+                  >
+                    <Button>
+                      <TitleButton>Continuar Doando</TitleButton>
+                    </Button>
+                  </Link>
                 </ContainerFooter>
               </CardProduct>
             ))}

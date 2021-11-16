@@ -65,7 +65,7 @@ export const SubtitleFooter = styled.h3`
   line-height: 33px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
