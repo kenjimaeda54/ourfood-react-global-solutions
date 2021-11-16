@@ -16,7 +16,6 @@ export function AppRoutes() {
       <Route exact path="/login" component={Login} />
       <Route exact path="/cadastro" component={RegisterProfile} />
       <Route exact path="/doacao" component={Donation} />
-      <Route exact path="/doacao" component={Donation} />
     </Switch>
   );
 }

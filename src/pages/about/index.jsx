@@ -37,9 +37,11 @@ export function About() {
           <Effect> Quem pode doar? </Effect>
         </TitleSection>
         <Description>
-          Todos são livres para doar resgatar suas recompensas, se deseja
-          cadastrar uma empresa,para divulgar ela no site . Existe opção no
-          momento de cadastro para esta situação.
+          Inicialmente a proposta era empresas, comércios e afins, que possuíam
+          alimentos próximo à validade doar. Nós percebemos a necessidade de
+          agregar a comunidade. Então todos são livres para doar e resgatar seus
+          pontos. Caso deseje cadastrar empresa, nos disponibilizamos um recurso
+          para este objetivo.
         </Description>
       </Section>
       <Section>

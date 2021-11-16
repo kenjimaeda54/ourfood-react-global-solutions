@@ -28,7 +28,7 @@ import {
   ContainerFooter,
   ButtonPerfil,
 } from './styles';
-import { baseUrl } from '../../util';
+import { baseUrl, keyStorageEmail } from '../../util';
 
 export function Profile() {
   const { userProfile } = useCustomContext();
@@ -191,7 +191,7 @@ export function Profile() {
         <Fragment>
           <Section>
             <SectionPhoto>
-              <Photo src={userProfile.photo} />
+              <Photo src={photo} />
 
               {salveEdit && (
                 <ButtonDonation onClick={handleChange}>
@@ -233,18 +233,7 @@ export function Profile() {
                   onKeyDown={(e) => handleKey(e)}
                   ref={emailRef}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                 />
-                {!disable && id === 2 && (
-                  <TitleField>Apos concluir digitar enter</TitleField>
-                )}
-                <Button
-                  onMouseOut={() => handleMouse('email')}
-                  onMouseOver={() => handleMouse('email')}
-                  onClick={() => handleEdit(2)}
-                >
-                  <Edit />
-                </Button>
               </ContainerInput>
               {password && (
                 <ContainerInput>

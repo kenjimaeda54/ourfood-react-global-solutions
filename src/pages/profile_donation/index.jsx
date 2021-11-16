@@ -31,6 +31,19 @@ export function ProfileDonation() {
           signal: controller.signal,
         });
         const response = await url.json();
+        if (userProfile.show) {
+          const fetchUrl = await fetch(
+            `${baseUrl}/users/id=${userProfile.userId}`,
+            {
+              signal: controller.signal,
+            },
+          );
+          const responseUser = await fetchUrl.json();
+          const { id } = responseUser.find(
+            (product) => product.id === userProfile.userId,
+          );
+          return setProductsUser(response.filter((it) => it.userId === id));
+        }
         setProductsUser(response.filter((it) => it.userId === userProfile.id));
       } catch (error) {
         console.log(error);

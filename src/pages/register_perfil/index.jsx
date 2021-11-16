@@ -150,6 +150,9 @@ export function RegisterProfile() {
                 <Description>
                   Vamos armazenar seu nome, email, senha para futuras consultas.
                 </Description>
+                <Description>
+                  Apos registrar o email não é possível alterar
+                </Description>
               </div>
             </ContainerText>
             <WrapLogin>

@@ -65,13 +65,10 @@ function UserProvider({ children }) {
     return () => controller.abort();
   }, []);
 
-  const handleUserProfile = (userProfile) => setUserProfile(userProfile);
-
   return (
     <ContextUser.Provider
       value={{
         userProfile,
-        handleUserProfile,
       }}
     >
       {children}

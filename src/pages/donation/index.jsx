@@ -19,6 +19,7 @@ export function Donation() {
   const [loading, setLoading] = useState(true);
   const [redirect, setRedirect] = useState(false);
   const [description, setDescription] = useState('');
+  const [id, setId] = useState(0);
   const [route, setRoute] = useState('');
 
   useEffect(() => {
@@ -49,6 +50,7 @@ export function Donation() {
       return;
     }
     setRedirect(true);
+    setId(id);
     setDescription(handleDescriptionRoute(id));
     setRoute(pathname);
   }
@@ -97,7 +99,7 @@ export function Donation() {
         <Redirect
           to={{
             pathname: route,
-            state: { description },
+            state: { description, id },
           }}
         />
       )}

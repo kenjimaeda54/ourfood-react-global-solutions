@@ -161,12 +161,15 @@ export function RegisterCompany() {
               <div>
                 <Description>
                   Seja bem-vindo novamente, nesta sessão pode registrar uma
-                  empresa
+                  empresa.
                 </Description>
                 <Description>
                   Apos optar por divulgar os dados da companhia não poderá
                   escolher novamente perfil pessoal , inclusive sera este perfil
-                  apresentado na tela inicial
+                  apresentado na tela inicial.
+                </Description>
+                <Description>
+                  Apos registrar o email não é possível alterar
                 </Description>
               </div>
             </ContainerText>
