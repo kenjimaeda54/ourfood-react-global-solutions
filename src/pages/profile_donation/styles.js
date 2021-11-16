@@ -26,7 +26,7 @@ export const Title = styled.h1`
 
 export const ContainerCardMission = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
   padding: 20px 45px;
@@ -84,4 +84,23 @@ export const TitleButton = styled.span`
   color: ${({ theme }) => theme.colors.white};
   font-size: 27px;
   line-height: 33px;
+`;
+
+export const ContainerReward = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 20px 45px;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 10px 0px;
+`;
+
+export const TitleDonation = styled.h3`
+  font-weight: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.white};
+  padding: 20px 45px;
+  font-size: 30px;
+  line-height: 35px;
+  margin: 20px 0px;
 `;

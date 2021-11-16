@@ -8,6 +8,7 @@ import { baseUrl } from '../../util';
 import {
   Container,
   Title,
+  TitleDonation,
   Subtitle,
   ContainerCardMission,
   ContainerLoading,
@@ -17,12 +18,14 @@ import {
   SubtitleFooter,
   Button,
   TitleButton,
+  ContainerReward,
 } from './styles';
 
 export function ProfileDonation() {
   const [loading, setLoading] = React.useState(true);
   const { userProfile } = useCustomContext();
   const [productsUser, setProductsUser] = useState([]);
+  const [rewardUser, setRewardUser] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -31,7 +34,11 @@ export function ProfileDonation() {
         const url = await fetch(`${baseUrl}/products`, {
           signal: controller.signal,
         });
+        const urlReward = await fetch(`${baseUrl}/rewards`, {
+          signal: controller.signal,
+        });
         const response = await url.json();
+        const reward = await urlReward.json();
         if (userProfile.show) {
           const fetchUrl = await fetch(
             `${baseUrl}/users/id=${userProfile.userId}`,
@@ -43,11 +50,12 @@ export function ProfileDonation() {
           const { id } = responseUser.find(
             (product) => product.id === userProfile.userId,
           );
-          return setProductsUser(response.filter((it) => it.userId === id));
+          setProductsUser(response.filter((it) => it.userId === id));
+          setRewardUser(reward.filter((it) => it.userId === id));
+          return;
         }
-        return setProductsUser(
-          response.filter((it) => it.userId === userProfile.id),
-        );
+        setProductsUser(response.filter((it) => it.userId === userProfile.id));
+        setRewardUser(reward.filter((it) => it.userId === userProfile.id));
       } catch (error) {
         console.log(error);
       } finally {
@@ -73,6 +81,7 @@ export function ProfileDonation() {
               Continue doando. Quanto mais doações, mais pontos vai arrecadar
             </Subtitle>
           </div>
+          <TitleDonation>Suas doações</TitleDonation>
           <ContainerCardMission>
             {productsUser.map((product) => (
               <CardProduct
@@ -100,6 +109,12 @@ export function ProfileDonation() {
               </CardProduct>
             ))}
           </ContainerCardMission>
+          <TitleDonation>Suas recompensas</TitleDonation>
+          <ContainerReward>
+            {rewardUser.map((it) => (
+              <CardProduct key={it.id} name={it.title} photo={it.photo} />
+            ))}
+          </ContainerReward>
         </Fragment>
       )}
       ;
