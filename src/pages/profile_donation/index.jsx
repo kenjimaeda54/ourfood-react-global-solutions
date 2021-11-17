@@ -76,7 +76,7 @@ export function ProfileDonation() {
       ) : (
         <Fragment>
           <div style={{ padding: 45 }}>
-            <Title>Sua lista de doacoes</Title>
+            <Title>Sua lista de doações e recompensas</Title>
             <Subtitle>
               Continue doando. Quanto mais doações, mais pontos vai arrecadar
             </Subtitle>

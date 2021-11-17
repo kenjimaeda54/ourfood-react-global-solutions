@@ -23,6 +23,7 @@ import {
   SubTitleFooter,
   TitleFooter,
   ButtonDonation,
+  DeletePerfil,
   TextDonation,
   ContainerProfile,
   ContainerFooter,
@@ -181,6 +182,28 @@ export function Profile() {
     }
   }
 
+  async function handleDelete() {
+    console.log(userProfile.id);
+    try {
+      setLoading(true);
+      if (userProfile.show) {
+        await fetch(`${baseUrl}/users/${userProfile.userId}`, {
+          method: 'DELETE',
+        });
+      } else {
+        await fetch(`${baseUrl}/users/${userProfile.id}`, {
+          method: 'DELETE',
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      window.location.href = '/';
+      localStorage.removeItem(keyStorageEmail);
+      setLoading(false);
+    }
+  }
+
   return (
     <Container>
       {loading ? (
@@ -198,6 +221,9 @@ export function Profile() {
                   <TextDonation>Salvar alterações </TextDonation>
                 </ButtonDonation>
               )}
+              <DeletePerfil onClick={handleDelete}>
+                <TextDonation>Deletar Perfil </TextDonation>
+              </DeletePerfil>
             </SectionPhoto>
             <ContainerField>
               <ContainerInput>

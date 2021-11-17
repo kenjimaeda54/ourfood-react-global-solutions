@@ -145,7 +145,7 @@ export const Input = styled.input`
 export const ContainerText = styled.div`
   display: flex;
   flex-direction: column;
-  height: 55%;
+  height: 75%;
   justify-content: space-evenly;
   align-items: flex-start;
   background: white;

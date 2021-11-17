@@ -166,6 +166,10 @@ export const ButtonDonation = styled.div`
   }
 `;
 
+export const DeletePerfil = styled(ButtonDonation)`
+  background-color: ${({ theme }) => theme.colors.red};
+`;
+
 export const ButtonPerfil = styled.button`
   display: flex;
   justify-content: center;
