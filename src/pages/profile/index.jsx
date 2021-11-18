@@ -37,6 +37,7 @@ export function Profile() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [photo, setPhoto] = useState('');
   const [punctuation, setPunctuation] = useState('');
@@ -119,14 +120,13 @@ export function Profile() {
       setLoading(true);
       if (password) {
         const profile = {
-          email,
           password,
           name,
           photo,
           punctuation,
           donation,
         };
-        await fetch(`${baseUrl}/users/${userProfile.id}`, {
+        await fetch(`${baseUrl}/users/${userId}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -166,19 +166,21 @@ export function Profile() {
       setLoading(true);
       const response = await fetch(`${baseUrl}/users/id=${userProfile.userId}`);
       const data = await response.json();
-      const { photo, password, punctuation, donation, name, email } = data.find(
-        (it) => it.id === userProfile.userId,
-      );
-      setPhoto(photo);
-      setPassword(password);
-      setPunctuation(punctuation);
-      setDonation(donation);
-      setName(name);
-      setEmail(email);
+      const dataUser = data.find((it) => it.id === userProfile.userId);
+      if (dataUser) {
+        setUserId(dataUser.id);
+        setPhoto(dataUser.photo);
+        setPassword(dataUser.password);
+        setPunctuation(dataUser.punctuation);
+        setDonation(dataUser.donation);
+        setName(dataUser.name);
+        setEmail(dataUser.email);
+        setLoading(false);
+      } else {
+        handleProfile();
+      }
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   }
 

@@ -38,6 +38,7 @@ export function RegisterCompany() {
   const [id, setId] = useState(0);
   const [typeInput, setTypeInput] = useState('password');
   const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSelect, setIsSelect] = useState(0);
 
@@ -59,12 +60,13 @@ export function RegisterCompany() {
     setError(handleValidate());
   }
 
+  console.log(userProfile.id);
+
   async function handleFetchUser() {
     try {
-      handleWithStorage();
       const profile = {
         name: nameRef.current.value,
-        email: emailRef.current.value,
+        email: email,
         photo: photoRef.current.value,
         userId: userProfile.id,
         show: isSelect,
@@ -77,6 +79,7 @@ export function RegisterCompany() {
         },
         body: JSON.stringify(profile),
       });
+      handleWithStorage();
     } catch (error) {
       console.log(error);
     } finally {
@@ -88,10 +91,7 @@ export function RegisterCompany() {
   function handleWithStorage() {
     if (isSelect === 1) {
       localStorage.removeItem(keyStorageEmail);
-      localStorage.setItem(
-        keyStorageEmail,
-        JSON.stringify(emailRef.current.value),
-      );
+      localStorage.setItem(keyStorageEmail, JSON.stringify(email));
       return;
     }
     return;
@@ -218,6 +218,8 @@ export function RegisterCompany() {
                 <Input
                   onFocus={() => handleFocus(2)}
                   type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                   onBlur={handleBlur}
                   onKeyDown={(e) => handleKey(e, 'email')}
                   ref={emailRef}

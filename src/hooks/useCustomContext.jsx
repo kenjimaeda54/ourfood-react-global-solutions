@@ -18,17 +18,16 @@ function UserProvider({ children }) {
           { signal: controller.signal },
         );
         const user = await userResponse.json();
-        if (emailStorage.length > 3 && user.length > 0) {
-          const { id, photo, punctuation, donation, name, email, password } =
-            user.find((user) => user.email === emailStorage);
+        const userFind = user.find((user) => user.email === emailStorage);
+        if (emailStorage.length > 3 && userFind) {
           return setUserProfile({
-            id,
-            photo,
-            punctuation,
-            donation,
-            name,
-            email,
-            password,
+            id: userFind.id,
+            photo: userFind.photo,
+            punctuation: userFind.punctuation,
+            donation: userFind.donation,
+            name: userFind.name,
+            email: userFind.email,
+            password: userFind.password,
           });
         } else {
           const userEmail = await fetch(
@@ -63,7 +62,7 @@ function UserProvider({ children }) {
     })();
 
     return () => controller.abort();
-  }, []);
+  }, [userProfile]);
 
   return (
     <ContextUser.Provider

@@ -70,11 +70,13 @@ export function Login() {
         signal: controller.signal,
       });
       const company = await fetchCompany.json();
-      console.log(company);
       const companyProfile = company.filter((it) => it.userId === id);
-      if (companyProfile.length > 0) {
-        const { email } = companyProfile.find((it) => it.show === 1);
-        localStorage.setItem(keyStorageEmail, JSON.stringify(email));
+      const showProfileCompany = companyProfile.find((it) => it.show === 1);
+      if (showProfileCompany) {
+        localStorage.setItem(
+          keyStorageEmail,
+          JSON.stringify(showProfileCompany.email),
+        );
         window.location.href = '/';
         return setLoading(false);
       } else {

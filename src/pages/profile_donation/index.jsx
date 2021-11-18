@@ -22,50 +22,52 @@ import {
 } from './styles';
 
 export function ProfileDonation() {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
   const { userProfile } = useCustomContext();
   const [productsUser, setProductsUser] = useState([]);
   const [rewardUser, setRewardUser] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
-    (async () => {
+    async function donation() {
       try {
-        const url = await fetch(`${baseUrl}/products`, {
-          signal: controller.signal,
-        });
-        const urlReward = await fetch(`${baseUrl}/rewards`, {
-          signal: controller.signal,
-        });
+        const url = await fetch(`${baseUrl}/products`);
+        const urlReward = await fetch(`${baseUrl}/rewards`);
         const response = await url.json();
         const reward = await urlReward.json();
         if (userProfile.show) {
-          const fetchUrl = await fetch(
-            `${baseUrl}/users/id=${userProfile.userId}`,
-            {
-              signal: controller.signal,
-            },
+          const { id } = response.find(
+            (product) => product.userId === userProfile.userId,
           );
-          const responseUser = await fetchUrl.json();
-          const { id } = responseUser.find(
-            (product) => product.id === userProfile.userId,
+          setProductsUser(
+            response.filter((it) => it.userId === userProfile.userId),
           );
-          setProductsUser(response.filter((it) => it.userId === id));
-          setRewardUser(reward.filter((it) => it.userId === id));
+          setRewardUser(
+            reward.filter((it) => it.userId === userProfile.userId),
+          );
           return;
         }
         setProductsUser(response.filter((it) => it.userId === userProfile.id));
         setRewardUser(reward.filter((it) => it.userId === userProfile.id));
       } catch (error) {
         console.log(error);
-      } finally {
-        setLoading(false);
       }
-    })();
+    }
+    if (loading) {
+      donation();
+    }
+
     return () => {
-      controller.abort();
+      setLoading(false);
     };
-  }, [userProfile]);
+  }, [
+    rewardUser,
+    productsUser,
+    loading,
+    userProfile.show,
+    userProfile.userId,
+    userProfile.id,
+  ]);
 
   return (
     <Container>
