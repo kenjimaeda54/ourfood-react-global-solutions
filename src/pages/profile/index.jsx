@@ -118,7 +118,7 @@ export function Profile() {
   async function handleChange() {
     try {
       setLoading(true);
-      if (password) {
+      if (password && userProfile.userId) {
         const profile = {
           password,
           name,
@@ -127,6 +127,22 @@ export function Profile() {
           donation,
         };
         await fetch(`${baseUrl}/users/${userId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify(profile),
+        });
+      } else if (password) {
+        const profile = {
+          password,
+          name,
+          photo,
+          punctuation,
+          donation,
+        };
+        await fetch(`${baseUrl}/users/${userProfile.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

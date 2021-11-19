@@ -72,16 +72,25 @@ export function RegisterCompany() {
         show: isSelect,
       };
 
-      await fetch(`${baseUrl}/companies`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(profile),
-      });
-      handleWithStorage();
+      const response = await fetch(`${baseUrl}/companies/${email}`);
+      const data = await response.json();
+      if (data.length === 0) {
+        await fetch(`${baseUrl}/companies`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(profile),
+        });
+        handleWithStorage();
+      } else {
+        return setError(
+          'E-mail já cadastrado, não foi possível registrar empresa',
+        );
+      }
     } catch (error) {
       console.log(error);
+      alert('Erro ao cadastrar empresa');
     } finally {
       window.location.href = '/';
       setLoading(false);

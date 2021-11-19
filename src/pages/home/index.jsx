@@ -36,19 +36,10 @@ export function Home() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    const controller = new AbortController();
     async function getUser() {
       try {
-        const responseUser = await fetch(`${baseUrl}/users`, {
-          signal: controller.signal,
-        });
-        //BANCO COM CREDENCIAIS DA KAREN O ID E 5
-        //BANCO COM CREDENCIAS DO KENJI O ID E 1
-        //BANCO COM CREDENCIAS DO RAFAEL O ID E 1
-        //BANCO COM CREDENCIAS DO JOAO O  ID E 2
-        const responseDonation = await fetch(`${baseUrl}/donations/1`, {
-          signal: controller.signal,
-        });
+        const responseUser = await fetch(`${baseUrl}/users`);
+        const responseDonation = await fetch(`${baseUrl}/donations/1`);
         const dataUser = await responseUser.json();
         const dataDonation = await responseDonation.json();
         setOrderedList(dataUser.sort((a, b) => b.punctuation - a.punctuation));
@@ -64,7 +55,6 @@ export function Home() {
       setLoading(true);
       setOrderedList([]);
       setMission([]);
-      controller.abort();
     };
   }, []);
 
